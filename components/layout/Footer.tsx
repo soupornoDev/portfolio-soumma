@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUp, Compass, Mail } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
+import { LinkedinIcon } from "@/components/ui/Icons";
 import { PORTFOLIO_DATA } from "@/lib/portfolio-data";
 
 export function Footer() {
@@ -62,15 +62,6 @@ export function Footer() {
           <div className="md:col-span-3 flex flex-col justify-between items-start md:items-end space-y-4">
             <div className="flex items-center gap-3">
               <a
-                href={PORTFOLIO_DATA.personal.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-md border border-[var(--surface-border)] bg-[var(--surface-muted)] flex items-center justify-center text-[var(--foreground)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors"
-                aria-label="GitHub Profile"
-              >
-                <GithubIcon className="w-4 h-4" />
-              </a>
-              <a
                 href={PORTFOLIO_DATA.personal.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -105,16 +96,7 @@ export function Footer() {
             © 2026 {PORTFOLIO_DATA.personal.name}. All Mechanical & CNC Design Rights Reserved.
           </div>
           <div className="flex items-center gap-3">
-            <span>Next.js 16 + Anime.js</span>
-            <span>•</span>
-            <a
-              href={PORTFOLIO_DATA.personal.repoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[var(--accent)] hover:underline"
-            >
-              soupornoDev/potfolio-soumma
-            </a>
+            <span>Engineering Precision & Modern Design</span>
           </div>
         </div>
       </div>

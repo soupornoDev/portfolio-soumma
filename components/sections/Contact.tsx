@@ -2,7 +2,7 @@ import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { TechnicalBadge } from "@/components/ui/TechnicalBadge";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { PORTFOLIO_DATA } from "@/lib/portfolio-data";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
+import { LinkedinIcon } from "@/components/ui/Icons";
 import { Mail, MapPin, Radio } from "lucide-react";
 
 export function Contact() {
@@ -60,24 +60,6 @@ export function Contact() {
                 <span className="text-[11px] font-mono text-[var(--muted-text)]">Professional Network</span>
                 <span className="text-xs sm:text-sm font-semibold text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">
                   LinkedIn Profile / InMail
-                </span>
-              </div>
-            </a>
-
-            {/* GitHub */}
-            <a
-              href={PORTFOLIO_DATA.personal.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-start gap-3 p-3 rounded-lg bg-[var(--surface-muted)]/60 border border-[var(--surface-border)] hover:border-[var(--accent)] transition-colors group"
-            >
-              <div className="p-2 rounded bg-[var(--surface)] text-[var(--accent)]">
-                <GithubIcon className="w-4 h-4" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[11px] font-mono text-[var(--muted-text)]">Open-Source Code & CAD</span>
-                <span className="text-xs sm:text-sm font-semibold text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">
-                  github.com/soupornoDev
                 </span>
               </div>
             </a>

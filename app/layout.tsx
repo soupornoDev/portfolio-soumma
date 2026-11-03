@@ -30,12 +30,12 @@ export const metadata: Metadata = {
     "Toolpath Optimization",
     "Soumma Chakraborty",
   ],
-  authors: [{ name: PORTFOLIO_DATA.personal.name, url: PORTFOLIO_DATA.personal.github }],
+  authors: [{ name: PORTFOLIO_DATA.personal.name, url: PORTFOLIO_DATA.personal.linkedin }],
   openGraph: {
     title: `${PORTFOLIO_DATA.personal.name} | Mechanical Engineer`,
     description: PORTFOLIO_DATA.personal.tagline,
     type: "website",
-    url: PORTFOLIO_DATA.personal.repoUrl,
+    url: PORTFOLIO_DATA.personal.linkedin,
   },
 };
 

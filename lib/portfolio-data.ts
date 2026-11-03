@@ -64,9 +64,7 @@ export const PORTFOLIO_DATA = {
     location: "India",
     availability: "Available for Full-time Roles & Engineering Opportunities",
     email: "soummachakraborty.eng@gmail.com",
-    github: "https://github.com/soupornoDev",
-    repoUrl: "https://github.com/soupornoDev/potfolio-soumma",
-    linkedin: "https://linkedin.com/in/soumma-chakraborty",
+    linkedin: "https://www.linkedin.com/in/soumma-chakraborty-10b85a230/",
     cadSoftware: ["SolidWorks", "Siemens NX", "PowerShape", "Autodesk Fusion 360", "AutoCAD", "PTC Creo"],
     camSoftware: ["Mastercam", "PowerMill", "Wire EDM", "CNC Milling & Turning"],
     standards: ["ASME Y14.5", "ISO 2768-m", "DIN 7168", "ISO 1101"],
@@ -105,7 +103,6 @@ export const PORTFOLIO_DATA = {
         "Assembled all tool parts in the toolroom assembly area with precision fits and loaded the tool into the press machine to successfully stamp out Key Rings.",
       ],
       drawingCode: "DWG-PT-KEYRING-001",
-      githubUrl: "https://github.com/soupornoDev/potfolio-soumma",
     },
     {
       id: "hand-injection-mould-machine",
@@ -132,7 +129,6 @@ export const PORTFOLIO_DATA = {
         "Assembled all fabricated machine parts together in the assembly bay to achieve the final, fully functional hand injection moulding machine.",
       ],
       drawingCode: "DWG-HIM-REV-002",
-      githubUrl: "https://github.com/soupornoDev/potfolio-soumma",
     },
     {
       id: "drone-prototype-cad-cam",
@@ -159,7 +155,6 @@ export const PORTFOLIO_DATA = {
         "Assembled each drone part together, verifying motor mount perpendicularity, structural stiffness, and balance.",
       ],
       drawingCode: "DWG-DRN-PRT-003",
-      githubUrl: "https://github.com/soupornoDev/potfolio-soumma",
     },
     {
       id: "marker-stand-injection-mould",
@@ -187,7 +182,6 @@ export const PORTFOLIO_DATA = {
         "Loaded the injection mould into the plastic moulding machine to successfully produce defect-free, high-finish Marker Stands.",
       ],
       drawingCode: "DWG-IM-MS-004",
-      githubUrl: "https://github.com/soupornoDev/potfolio-soumma",
     },
   ] as Project[],
 
