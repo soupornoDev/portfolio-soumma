@@ -1,0 +1,8 @@
+# Robots.txt for Soumma Chakraborty Portfolio
+# Mechanical Engineer — CNC Machine Design & Precision Mechanical Systems
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://soumma-chakraborty.vercel.app/sitemap.xml

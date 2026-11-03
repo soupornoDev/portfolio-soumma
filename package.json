@@ -4,14 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:host":"next dev -H 0.0.0.0",
+    "dev:host": "next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
-    "@types/animejs": "^3.1.13",
-    "@types/nodemailer": "^8.0.2",
     "animejs": "^3.2.2",
     "lucide-react": "^1.66.0",
     "next": "16.4.4",
@@ -22,7 +20,9 @@
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "^4",
+    "@types/animejs": "^3.1.13",
     "@types/node": "^20",
+    "@types/nodemailer": "^8.0.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
