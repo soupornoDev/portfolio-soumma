@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { Download, ArrowLeft, Mail, MapPin, Compass, CheckCircle2, Award, Briefcase, GraduationCap, FileText } from "lucide-react";
+import { Download, ArrowLeft, Mail, Phone, MapPin, Compass, CheckCircle2, Award, Briefcase, GraduationCap, FileText } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/lib/portfolio-data";
 import { SITE_URL } from "@/lib/site-config";
 import { LinkedinIcon } from "@/components/ui/Icons";
@@ -67,6 +67,12 @@ export default function CvPage() {
               {/* Quick Contact Badge */}
               <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono text-[var(--muted-text)]">
                 <span className="flex items-center gap-1.5">
+                  <Phone className="w-3.5 h-3.5 text-[var(--accent)] shrink-0" />
+                  <a href={`tel:${PORTFOLIO_DATA.personal.phone}`} className="hover:underline font-semibold text-[var(--foreground)]">
+                    +91 8617748778
+                  </a>
+                </span>
+                <span className="flex items-center gap-1.5">
                   <Mail className="w-3.5 h-3.5 text-[var(--accent)] shrink-0" />
                   <a href={`mailto:${PORTFOLIO_DATA.personal.email}`} className="hover:underline">
                     {PORTFOLIO_DATA.personal.email}
@@ -84,9 +90,9 @@ export default function CvPage() {
                     {SITE_URL.replace(/^https?:\/\//, "")}
                   </a>
                 </span>
-                <span className="flex items-center gap-1.5">
+                <span className="flex items-center gap-1.5 sm:col-span-2">
                   <MapPin className="w-3.5 h-3.5 text-[var(--accent)] shrink-0" />
-                  <span>{PORTFOLIO_DATA.personal.location} (Open to Global Relocation/Remote)</span>
+                  <span>193, J.N Bose road Kolkata 700147, India</span>
                 </span>
               </div>
             </div>
@@ -248,7 +254,7 @@ export default function CvPage() {
         </section>
 
         {/* Certifications */}
-        <section className="mb-4">
+        <section className="mb-8">
           <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-[var(--accent)] border-b border-[var(--surface-border)] pb-1.5 mb-3 flex items-center gap-2">
             <Award className="w-3.5 h-3.5" />
             <span>06 // Technical Certifications & Accreditations</span>
@@ -266,6 +272,27 @@ export default function CvPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Languages */}
+        <section className="mb-4">
+          <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-[var(--accent)] border-b border-[var(--surface-border)] pb-1.5 mb-3 flex items-center gap-2">
+            <span>07 // Languages</span>
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs font-mono">
+            <div className="p-2.5 rounded-lg border border-[var(--surface-border)] bg-[var(--surface-muted)]/40 flex justify-between items-center">
+              <span className="font-bold text-[var(--foreground)]">Bengali</span>
+              <span className="text-[10px] text-[var(--accent)] font-semibold">Advanced / Native</span>
+            </div>
+            <div className="p-2.5 rounded-lg border border-[var(--surface-border)] bg-[var(--surface-muted)]/40 flex justify-between items-center">
+              <span className="font-bold text-[var(--foreground)]">English</span>
+              <span className="text-[10px] text-[var(--accent)] font-semibold">Intermediate</span>
+            </div>
+            <div className="p-2.5 rounded-lg border border-[var(--surface-border)] bg-[var(--surface-muted)]/40 flex justify-between items-center">
+              <span className="font-bold text-[var(--foreground)]">Hindi</span>
+              <span className="text-[10px] text-[var(--accent)] font-semibold">Intermediate</span>
+            </div>
           </div>
         </section>
 
