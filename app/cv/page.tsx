@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Download, ArrowLeft, Mail, MapPin, Compass, CheckCircle2, Award, Briefcase, GraduationCap, FileText } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/lib/portfolio-data";
 import { SITE_URL } from "@/lib/site-config";
@@ -51,8 +52,8 @@ export default function CvPage() {
       <main className="max-w-4xl mx-auto rounded-2xl border border-[var(--surface-border)] bg-[var(--surface)] p-6 sm:p-12 shadow-md print:shadow-none print:border-none print:p-0">
         {/* Header Block */}
         <header className="border-b border-[var(--surface-border)] pb-8 mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-            <div>
+          <div className="flex flex-col-reverse sm:flex-row sm:items-start justify-between gap-6">
+            <div className="flex-1">
               <span className="text-xs font-mono uppercase tracking-widest text-[var(--accent)] font-semibold">
                 CURRICULUM VITAE // ENGINEERING SPECIFICATION
               </span>
@@ -62,31 +63,48 @@ export default function CvPage() {
               <p className="text-base sm:text-lg font-medium text-[var(--accent)] mt-1 font-mono">
                 {PORTFOLIO_DATA.personal.discipline} &bull; {PORTFOLIO_DATA.personal.specialization}
               </p>
+
+              {/* Quick Contact Badge */}
+              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono text-[var(--muted-text)]">
+                <span className="flex items-center gap-1.5">
+                  <Mail className="w-3.5 h-3.5 text-[var(--accent)] shrink-0" />
+                  <a href={`mailto:${PORTFOLIO_DATA.personal.email}`} className="hover:underline">
+                    {PORTFOLIO_DATA.personal.email}
+                  </a>
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <LinkedinIcon className="w-3.5 h-3.5 text-[var(--accent)] shrink-0" />
+                  <a href={PORTFOLIO_DATA.personal.linkedin} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                    linkedin.com/in/soumma-chakraborty
+                  </a>
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Compass className="w-3.5 h-3.5 text-[var(--accent)] shrink-0" />
+                  <a href={SITE_URL} target="_blank" rel="noopener noreferrer" className="hover:underline text-[var(--foreground)] font-semibold">
+                    {SITE_URL.replace(/^https?:\/\//, "")}
+                  </a>
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-[var(--accent)] shrink-0" />
+                  <span>{PORTFOLIO_DATA.personal.location} (Open to Global Relocation/Remote)</span>
+                </span>
+              </div>
             </div>
 
-            {/* Quick Contact Badge */}
-            <div className="flex flex-col sm:items-end text-xs font-mono text-[var(--muted-text)] space-y-1">
-              <span className="flex items-center gap-1.5">
-                <Mail className="w-3.5 h-3.5 text-[var(--accent)]" />
-                <a href={`mailto:${PORTFOLIO_DATA.personal.email}`} className="hover:underline">
-                  {PORTFOLIO_DATA.personal.email}
-                </a>
-              </span>
-              <span className="flex items-center gap-1.5">
-                <LinkedinIcon className="w-3.5 h-3.5 text-[var(--accent)]" />
-                <a href={PORTFOLIO_DATA.personal.linkedin} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                  linkedin.com/in/soumma-chakraborty
-                </a>
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Compass className="w-3.5 h-3.5 text-[var(--accent)]" />
-                <a href={SITE_URL} target="_blank" rel="noopener noreferrer" className="hover:underline text-[var(--foreground)] font-semibold">
-                  {SITE_URL.replace(/^https?:\/\//, "")}
-                </a>
-              </span>
-              <span className="flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-[var(--accent)]" />
-                <span>{PORTFOLIO_DATA.personal.location} (Open to Global Relocation/Remote)</span>
+            {/* Profile Photo - ATS Compliant, semantic alt, clean framing */}
+            <div className="flex sm:flex-col items-center sm:items-end gap-2.5 shrink-0">
+              <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border-2 border-[var(--surface-border)] shadow-sm bg-[var(--surface-muted)]">
+                <Image
+                  src="/soumma-chakraborty.jpg"
+                  alt={`${PORTFOLIO_DATA.personal.name} - Mechanical Engineer`}
+                  width={112}
+                  height={112}
+                  className="w-full h-full object-cover"
+                  priority
+                />
+              </div>
+              <span className="hidden sm:inline-block text-[10px] font-mono text-[var(--muted-text)] tracking-wider">
+                REF: MECH-2026
               </span>
             </div>
           </div>
