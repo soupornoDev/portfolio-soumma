@@ -1,4 +1,4 @@
-⚙️ Soumma Chakraborty — Engineering Portfolio
+# ⚙️ Soumma Chakraborty — Engineering Portfolio
 
 <p align="center">
   <strong>DESIGN. ENGINEER. INNOVATE.</strong>
@@ -13,9 +13,11 @@
   <img src="https://img.shields.io/badge/Deployment-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
 </p><p align="center">
   <i>Precision in engineering. Creativity in design. Excellence in execution.</i>
-</p>---
+</p>
 
-📐 Overview
+---
+
+## 📐 Overview
 
 Welcome to the source code of my personal engineering portfolio.
 
@@ -31,7 +33,7 @@ Rather than functioning as a conventional online resume, this portfolio serves a
 
 ---
 
-✨ Design Philosophy
+## ✨ Design Philosophy
 
 The portfolio follows a premium, minimal, and engineering-inspired design language.
 
@@ -47,9 +49,9 @@ The visual direction is inspired by modern engineering interfaces, precision mac
 
 ---
 
-🚀 Features
+## 🚀 Features
 
-🎨 Modern Portfolio Experience
+### 🎨 Modern Portfolio Experience
 
 - Premium and minimal visual design.
 - Responsive layouts for different screen sizes.
@@ -58,7 +60,7 @@ The visual direction is inspired by modern engineering interfaces, precision mac
 - Interactive UI elements.
 - Consistent design language across portfolio sections.
 
-🌓 Theme Experience
+### 🌓 Theme Experience
 
 The interface supports a theme-aware design.
 
@@ -67,7 +69,7 @@ The interface supports a theme-aware design.
 - Theme persistence through the existing theme provider.
 - Consistent colors across the interface.
 
-🧑‍💻 Professional Profile
+### 🧑‍💻 Professional Profile
 
 A structured presentation of my professional background, including:
 
@@ -79,7 +81,7 @@ A structured presentation of my professional background, including:
 - Selected projects.
 - Contact and professional links.
 
-⚙️ Engineering Project Showcase
+### ⚙️ Engineering Project Showcase
 
 The portfolio is intended to highlight practical engineering work, including:
 
@@ -94,7 +96,7 @@ The portfolio is intended to highlight practical engineering work, including:
 
 Project information is organized to communicate the engineering problem, design approach, tools used, and outcome.
 
-📱 Responsive Interface
+### 📱 Responsive Interface
 
 The application is designed to adapt to:
 
@@ -103,7 +105,7 @@ The application is designed to adapt to:
 - Tablets.
 - Mobile devices.
 
-🔍 Technical SEO
+### 🔍 Technical SEO
 
 The project includes a foundation for search engine optimization through:
 
@@ -120,7 +122,7 @@ The exact implementation should be verified against the current source code and 
 
 ---
 
-🛠️ Technology Stack
+### 🛠️ Technology Stack
 
 The project uses a modern web development stack.
 
@@ -155,7 +157,7 @@ MongoDB| Database, where used by the application
 
 ---
 
-🏗️ Application Architecture
+### 🏗️ Application Architecture
 
 The project follows a modular Next.js architecture.
 
@@ -220,7 +222,7 @@ portfolio-soumma/
 
 ---
 
-💻 Getting Started
+## 💻 Getting Started
 
 Follow these instructions to run the portfolio locally.
 
@@ -272,7 +274,7 @@ The application should now be available locally.
 
 ---
 
-📦 Available Scripts
+### 📦 Available Scripts
 
 The available scripts depend on the project's "package.json".
 
@@ -287,7 +289,7 @@ Command| Description
 
 ---
 
-🌐 Deployment
+## 🌐 Deployment
 
 The portfolio is designed for deployment on Vercel.
 
@@ -315,7 +317,7 @@ Before deploying, verify:
 
 ---
 
-🔎 Search Engine Optimization
+## 🔎 Search Engine Optimization
 
 Search engine optimization is an important part of making a professional portfolio discoverable.
 
@@ -390,7 +392,7 @@ Verify:
 
 ---
 
-📸 Screenshots & Preview
+## 📸 Screenshots & Preview
 
 Visual documentation helps visitors understand the portfolio before exploring the source code.
 
@@ -414,7 +416,7 @@ Mobile Experience
 
 ---
 
-🧭 Future Improvements
+## 🧭 Future Improvements
 
 Potential enhancements for the portfolio include:
 
@@ -433,7 +435,7 @@ These are potential improvements and should not be interpreted as currently impl
 
 ---
 
-👨‍🔧 About the Author
+## 👨‍🔧 About the Author
 
 Soumma Chakraborty
 
@@ -462,9 +464,11 @@ Connect With Me
   <a href="https://www.linkedin.com/in/soumma-chakraborty-10b85a230">
     <img src="https://img.shields.io/badge/LinkedIn-Soumma%20Chakraborty-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
   </a>
-</p>---
+</p> 
 
-📄 License
+---
+
+## 📄 License
 
 The licensing terms for this project should be defined in the repository.
 
