@@ -23,24 +23,34 @@ export function JsonLd() {
         sameAs: [PORTFOLIO_DATA.personal.linkedin],
         knowsAbout: [
           "Mechanical Engineering",
+          "CAD/CAM Engineering",
           "CNC Machine Design",
-          "CAD/CAM",
+          "Product Design Engineering",
+          "Creo Parametric Design",
+          "Siemens NX Design",
+          "Sheet Metal Design",
+          "Surface Modeling",
+          "Finite Element Analysis",
+          "ANSYS Simulation",
+          "GD&T (ASME Y14.5 / ISO 1101)",
+          "Precision Machine Design",
           "3D Parametric Modeling",
           "SolidWorks",
-          "Siemens NX",
-          "PTC Creo",
           "Delcam PowerShape",
           "Delcam PowerMill",
           "Mastercam",
           "Press Tool & Die Design",
           "Plastic Injection Mould Design",
           "Reverse Engineering",
-          "GD&T (ASME Y14.5 / ISO 1101)",
-          "Finite Element Analysis (FEA)",
-          "ANSYS Simulation",
           "Quality Assurance & 7 QC Tools",
           "Engineering Metrology",
         ],
+        hasOccupation: {
+          "@type": "Occupation",
+          name: "Mechanical Design Engineer",
+          description: "Specializing in CAD/CAM, CNC Machine Design, Sheet Metal Design, Surface Modeling, and ANSYS FEA Simulation.",
+          skills: "SolidWorks, Siemens NX, Creo Parametric, Mastercam, Delcam PowerMill, ANSYS FEA, GD&T, CNC Machining, Injection Mould Design, Press Tool Design",
+        },
         alumniOf: PORTFOLIO_DATA.education.map((edu) => ({
           "@type": "EducationalOrganization",
           name: edu.institution,
@@ -111,7 +121,7 @@ export function JsonLd() {
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(structuredData),
+        __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
       }}
     />
   );

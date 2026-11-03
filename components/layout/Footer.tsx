@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUp, Compass, Mail } from "lucide-react";
+import { ArrowUp, Compass, Mail, Download } from "lucide-react";
 import { LinkedinIcon } from "@/components/ui/Icons";
 import { PORTFOLIO_DATA } from "@/lib/portfolio-data";
 
@@ -97,7 +97,15 @@ export function Footer() {
           <div>
             © 2026 {PORTFOLIO_DATA.personal.name}. All Mechanical & CNC Design Rights Reserved.
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
+            <a
+              href="/Soumma_Chakraborty_CV.pdf"
+              download="Soumma_Chakraborty_CV.pdf"
+              className="inline-flex items-center gap-1 text-[var(--accent)] hover:underline font-semibold"
+            >
+              <Download className="w-3 h-3" />
+              <span>Download CV (PDF)</span>
+            </a>
             <span>Engineering Precision & Modern Design</span>
           </div>
         </div>

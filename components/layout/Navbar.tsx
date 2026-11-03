@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Menu, X, Compass, ArrowUpRight } from "lucide-react";
+import { Menu, X, Compass, ArrowUpRight, Download } from "lucide-react";
 import anime from "animejs";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { PORTFOLIO_DATA } from "@/lib/portfolio-data";
@@ -24,15 +24,26 @@ export function Navbar() {
   const mobileDrawerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
 
-  // Close mobile drawer on Escape key press
+  // Handle Escape key and focus management for mobile drawer
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && mobileMenuOpen) {
         setMobileMenuOpen(false);
       }
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+
+    if (mobileMenuOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+      // Move focus to first nav item when mobile menu opens
+      const timer = setTimeout(() => {
+        const firstLink = mobileDrawerRef.current?.querySelector<HTMLAnchorElement>("a");
+        firstLink?.focus();
+      }, 50);
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+        clearTimeout(timer);
+      };
+    }
   }, [mobileMenuOpen]);
 
   // Animate mobile drawer when opened
@@ -95,9 +106,20 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* Right Action: Theme Toggle & Inquire Button */}
+        {/* Right Action: Theme Toggle, CV Download & Inquire Button */}
         <div className="flex items-center gap-2">
           <ThemeToggle />
+
+          <a
+            href="/Soumma_Chakraborty_CV.pdf"
+            download="Soumma_Chakraborty_CV.pdf"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono font-medium border border-[var(--accent)]/40 bg-[var(--accent-light)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition-all shadow-xs cursor-pointer"
+            title="Download Soumma Chakraborty's Official CV (PDF)"
+            aria-label="Download CV (PDF)"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>Download CV</span>
+          </a>
 
           <Link
             href="#contact"
@@ -140,28 +162,44 @@ export function Navbar() {
           aria-label="Mobile Navigation"
           className="lg:hidden relative z-50 border-t border-[var(--surface-border)] bg-[var(--background)] px-6 py-5 shadow-2xl space-y-4 animate-in fade-in slide-in-from-top-2 duration-200"
         >
+          {/* Header: Original clean design with INDEX replaced by a subtle animated indicator */}
           <div className="text-[10px] font-mono uppercase tracking-wider text-[var(--muted-text)] border-b border-[var(--surface-border)] pb-2 flex items-center justify-between">
             <span>Portfolio Sections</span>
-            <span className="text-[var(--accent)]">INDEX</span>
+            <span className="inline-flex items-center gap-1.5 text-[var(--accent)] font-mono text-[10px]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-ping" />
+              <span className="text-[var(--foreground)] font-semibold tracking-wider">NAV</span>
+            </span>
           </div>
+
           <nav className="flex flex-col space-y-1">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
                 onClick={closeMenu}
-                className="mobile-nav-link text-sm font-mono py-2 text-[var(--foreground)] hover:text-[var(--accent)] flex items-center justify-between border-b border-[var(--surface-border)]/40"
+                className="mobile-nav-link text-sm font-mono py-2 text-[var(--foreground)] hover:text-[var(--accent)] flex items-center justify-between border-b border-[var(--surface-border)]/40 transition-colors"
               >
                 <span>{link.label}</span>
                 <span className="text-xs text-[var(--muted-text)] font-sans">→</span>
               </Link>
             ))}
           </nav>
-          <div className="pt-2">
+
+          <div className="pt-2 space-y-2">
+            <a
+              href="/Soumma_Chakraborty_CV.pdf"
+              download="Soumma_Chakraborty_CV.pdf"
+              onClick={closeMenu}
+              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg border border-[var(--surface-border)] bg-[var(--surface-muted)] text-[var(--foreground)] hover:border-[var(--accent)] hover:text-[var(--accent)] font-medium text-xs font-mono transition-colors"
+            >
+              <Download className="w-3.5 h-3.5 text-[var(--accent)]" />
+              <span>Download CV (PDF)</span>
+            </a>
+
             <Link
               href="#contact"
               onClick={closeMenu}
-              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[var(--foreground)] text-[var(--background)] font-medium text-xs font-mono"
+              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[var(--foreground)] text-[var(--background)] font-medium text-xs font-mono transition-opacity hover:opacity-90"
             >
               <span>Get in Touch with Soumma</span>
               <ArrowUpRight className="w-4 h-4" />

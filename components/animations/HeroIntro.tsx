@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { ArrowDownRight, Compass, Send, Wrench } from "lucide-react";
+import { ArrowDownRight, Compass, Send, Wrench, Download } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/lib/portfolio-data";
 import { createHeroAnimation, removeAnime } from "@/lib/animations";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -105,12 +105,23 @@ export function HeroIntro() {
             </Link>
 
             <a
+              href="/Soumma_Chakraborty_CV.pdf"
+              download="Soumma_Chakraborty_CV.pdf"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-[var(--accent)]/50 bg-[var(--accent-light)] text-[var(--accent)] font-medium text-sm hover:bg-[var(--accent)] hover:text-white transition-all active:scale-[0.98] shadow-xs cursor-pointer"
+              title="Download Soumma Chakraborty's Official Curriculum Vitae (PDF)"
+              aria-label="Download CV (PDF)"
+            >
+              <Download className="w-4 h-4" />
+              <span>Download CV (PDF)</span>
+            </a>
+
+            <Link
               href="#skills"
               className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-xs font-mono text-[var(--muted-text)] hover:text-[var(--foreground)] transition-colors cursor-pointer"
             >
               <Wrench className="w-3.5 h-3.5" />
               <span>Technical Standards</span>
-            </a>
+            </Link>
           </div>
 
           {/* Precision Metrics Row */}

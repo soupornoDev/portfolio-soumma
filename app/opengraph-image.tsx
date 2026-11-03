@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { PORTFOLIO_DATA } from "@/lib/portfolio-data";
+import { SITE_URL } from "@/lib/site-config";
 
 export const alt = "Soumma Chakraborty | Mechanical Engineer — CNC Machine Design";
 export const size = {
@@ -116,7 +117,7 @@ export default async function Image() {
               fontWeight: 600,
             }}
           >
-            soumma-chakraborty.vercel.app
+            {SITE_URL.replace(/^https?:\/\//, "")}
           </div>
         </div>
       </div>

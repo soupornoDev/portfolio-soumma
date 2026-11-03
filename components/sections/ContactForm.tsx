@@ -18,6 +18,7 @@ export function ContactForm() {
     subject: "Mechanical / CNC Design Inquiry",
     message: "",
   });
+  const [honeypot, setHoneypot] = useState<string>("");
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [feedback, setFeedback] = useState<string>("");
@@ -101,7 +102,10 @@ export function ContactForm() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          _gotcha: honeypot,
+        }),
         signal: controller.signal,
       });
 
@@ -157,6 +161,20 @@ export function ContactForm() {
       </div>
 
       <form onSubmit={handleSubmit} noValidate className="space-y-4">
+        {/* Anti-spam Honeypot Field */}
+        <div className="hidden" aria-hidden="true" style={{ display: "none" }}>
+          <label htmlFor="contact-gotcha">Do not fill this field</label>
+          <input
+            id="contact-gotcha"
+            type="text"
+            name="_gotcha"
+            tabIndex={-1}
+            autoComplete="off"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+          />
+        </div>
+
         {/* Name Field */}
         <div>
           <label
@@ -170,6 +188,7 @@ export function ContactForm() {
             id="contact-name"
             type="text"
             required
+            maxLength={100}
             aria-required="true"
             aria-invalid={!!fieldErrors.name}
             aria-describedby={fieldErrors.name ? "contact-name-error" : undefined}
@@ -200,6 +219,7 @@ export function ContactForm() {
             id="contact-email"
             type="email"
             required
+            maxLength={100}
             aria-required="true"
             aria-invalid={!!fieldErrors.email}
             aria-describedby={fieldErrors.email ? "contact-email-error" : undefined}
@@ -228,6 +248,7 @@ export function ContactForm() {
           <input
             id="contact-subject"
             type="text"
+            maxLength={150}
             value={formData.subject}
             onChange={(e) => handleFieldChange("subject", e.target.value)}
             className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--surface-border)] bg-[var(--surface-muted)] text-sm text-[var(--foreground)] placeholder:text-[var(--muted-text)] focus:outline-none focus:border-[var(--accent)] transition-colors"
@@ -247,6 +268,7 @@ export function ContactForm() {
             id="contact-message"
             rows={4}
             required
+            maxLength={5000}
             aria-required="true"
             aria-invalid={!!fieldErrors.message}
             aria-describedby={fieldErrors.message ? "contact-message-error" : undefined}
@@ -312,7 +334,6 @@ export function ContactForm() {
         <button
           ref={submitBtnRef}
           type="submit"
-          onClick={handleSubmit}
           disabled={status === "submitting"}
           className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-[var(--foreground)] text-[var(--background)] font-medium text-xs font-mono tracking-wider uppercase hover:opacity-90 disabled:opacity-50 transition-all active:scale-[0.98] cursor-pointer shadow-sm select-none"
         >

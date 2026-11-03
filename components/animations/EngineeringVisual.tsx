@@ -9,6 +9,7 @@ export function EngineeringVisual() {
   const spindleRef = useRef<SVGGElement>(null);
   const toolpathRef = useRef<SVGPathElement>(null);
   const coordinatesRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number | null>(null);
   const prefersReducedMotion = useReducedMotion();
 
   const [coords, setCoords] = useState<{ x: number; y: number; z: number }>({
@@ -16,6 +17,14 @@ export function EngineeringVisual() {
     y: 75.25,
     z: -12.5,
   });
+
+  useEffect(() => {
+    return () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (prefersReducedMotion) return;
@@ -59,26 +68,44 @@ export function EngineeringVisual() {
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const relX = ((e.clientX - rect.left) / rect.width) * 320;
-    const relY = ((e.clientY - rect.top) / rect.height) * 240;
-    setCoords({
-      x: parseFloat(relX.toFixed(2)),
-      y: parseFloat(relY.toFixed(2)),
-      z: -12.5,
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+
+    if (rafRef.current !== null) return;
+
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const relX = ((clientX - rect.left) / rect.width) * 320;
+      const relY = ((clientY - rect.top) / rect.height) * 240;
+      setCoords({
+        x: parseFloat(relX.toFixed(2)),
+        y: parseFloat(relY.toFixed(2)),
+        z: -12.5,
+      });
     });
   };
 
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
     if (!containerRef.current || !e.touches[0]) return;
     const touch = e.touches[0];
-    const rect = containerRef.current.getBoundingClientRect();
-    const relX = ((touch.clientX - rect.left) / rect.width) * 320;
-    const relY = ((touch.clientY - rect.top) / rect.height) * 240;
-    setCoords({
-      x: parseFloat(Math.max(0, Math.min(320, relX)).toFixed(2)),
-      y: parseFloat(Math.max(0, Math.min(240, relY)).toFixed(2)),
-      z: -12.5,
+    const clientX = touch.clientX;
+    const clientY = touch.clientY;
+
+    if (rafRef.current !== null) return;
+
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const relX = ((clientX - rect.left) / rect.width) * 320;
+      const relY = ((clientY - rect.top) / rect.height) * 240;
+      setCoords({
+        x: parseFloat(Math.max(0, Math.min(320, relX)).toFixed(2)),
+        y: parseFloat(Math.max(0, Math.min(240, relY)).toFixed(2)),
+        z: -12.5,
+      });
     });
   };
 

@@ -16,7 +16,7 @@ export function Projects() {
             Featured CNC & Mechanical Systems
           </h2>
           <p className="text-sm sm:text-base text-[var(--muted-text)] max-w-2xl mt-2">
-            Selected engineering designs spanning rigid machine gantries, quick-change tooling fixtures, harmonic rotary indexing units, and FEA thermal optimization.
+            Selected mechanical engineering designs spanning sheet metal press tools, reverse-engineered plastic injection moulding machinery, Delcam PowerShape and PowerMill drone chassis prototypes, and multi-plate mould tooling validated with ANSYS FEA.
           </p>
         </div>
       </ScrollReveal>
