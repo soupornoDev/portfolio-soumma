@@ -6,7 +6,7 @@ import { Cpu } from "lucide-react";
 
 export function Projects() {
   return (
-    <section id="projects" className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-[var(--surface-border)]">
+    <section id="projects" className="scroll-mt-20 py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-[var(--surface-border)]">
       <ScrollReveal>
         <div className="flex flex-col items-start mb-12">
           <TechnicalBadge variant="neutral" icon={<Cpu className="w-3.5 h-3.5" />}>

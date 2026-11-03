@@ -5,7 +5,7 @@ import { BookOpen, ExternalLink, GraduationCap, MapPin } from "lucide-react";
 
 export function Education() {
   return (
-    <section id="education" className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-[var(--surface-border)]">
+    <section id="education" className="scroll-mt-20 py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-[var(--surface-border)]">
       <ScrollReveal>
         <div className="flex flex-col items-start mb-12">
           <TechnicalBadge variant="neutral" icon={<GraduationCap className="w-3.5 h-3.5" />}>

@@ -21,18 +21,19 @@ const NAV_LINKS = [
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const mobileDrawerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
 
+  // Close mobile drawer on Escape key press
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
     };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
 
   // Animate mobile drawer when opened
   useEffect(() => {
@@ -44,9 +45,9 @@ export function Navbar() {
       anime({
         targets: links,
         opacity: [0, 1],
-        translateX: [-16, 0],
-        delay: anime.stagger(60, { start: 100 }),
-        duration: 400,
+        translateX: [-12, 0],
+        delay: anime.stagger(40, { start: 50 }),
+        duration: 300,
         easing: "easeOutCubic",
       });
     }
@@ -57,36 +58,31 @@ export function Navbar() {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-[var(--background)]/85 backdrop-blur-md border-b border-[var(--surface-border)] shadow-sm py-3"
-          : "bg-transparent py-4 border-b border-transparent"
-      }`}
-    >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+    <header className="sticky top-0 left-0 right-0 z-50 w-full bg-[var(--background)]/90 backdrop-blur-md border-b border-[var(--surface-border)] shadow-xs transition-colors">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
         {/* Brand / Engineering Monogram */}
         <Link
           href="#home"
-          className="group flex items-center gap-2 text-sm font-mono font-semibold tracking-wider text-[var(--foreground)]"
+          className="group flex items-center gap-2.5 text-sm font-mono font-semibold tracking-wider text-[var(--foreground)]"
           aria-label="Soumma Chakraborty - Mechanical Engineer"
         >
-          <span className="flex items-center justify-center w-7 h-7 rounded border border-[var(--surface-border)] bg-[var(--surface)] text-[var(--accent)] group-hover:border-[var(--accent)] transition-colors">
+          <span className="flex items-center justify-center w-8 h-8 rounded border border-[var(--surface-border)] bg-[var(--surface)] text-[var(--accent)] group-hover:border-[var(--accent)] transition-colors">
             <Compass className="w-4 h-4" />
           </span>
           <div className="flex flex-col">
-            <span className="leading-tight text-xs uppercase tracking-widest font-bold">
-              {PORTFOLIO_DATA.personal.shortName}
+            <span className="leading-tight text-xs uppercase tracking-wider font-bold">
+              <span className="hidden sm:inline">{PORTFOLIO_DATA.personal.name}</span>
+              <span className="sm:hidden">{PORTFOLIO_DATA.personal.shortName}</span>
             </span>
             <span className="text-[10px] text-[var(--muted-text)] font-normal tracking-tight">
-              MECH // CNC.DESIGN
+              MECHANICAL &amp; CNC DESIGN
             </span>
           </div>
         </Link>
 
         {/* Desktop Navigation Links */}
         <nav
-          className="hidden md:flex items-center gap-1 text-xs font-mono text-[var(--muted-text)]"
+          className="hidden lg:flex items-center gap-1 text-xs font-mono text-[var(--muted-text)]"
           aria-label="Main Navigation"
         >
           {NAV_LINKS.map((link) => (
@@ -100,7 +96,7 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* Right Action: Theme Toggle & Contact Pill */}
+        {/* Right Action: Theme Toggle & Inquire Button */}
         <div className="flex items-center gap-2">
           <ThemeToggle />
 
@@ -116,7 +112,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden flex items-center justify-center w-9 h-9 rounded-md border border-[var(--surface-border)] bg-[var(--surface)] text-[var(--foreground)] hover:border-[var(--accent)] transition-colors"
+            className="lg:hidden flex items-center justify-center w-9 h-9 rounded-md border border-[var(--surface-border)] bg-[var(--surface)] text-[var(--foreground)] hover:border-[var(--accent)] transition-colors"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
           >
@@ -125,17 +121,26 @@ export function Navbar() {
         </div>
       </div>
 
+      {/* Mobile Menu Backdrop */}
+      {mobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 top-[57px] bg-black/40 backdrop-blur-xs z-40"
+          onClick={closeMenu}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
         <div
           ref={mobileDrawerRef}
-          className="md:hidden fixed inset-x-0 top-[61px] bg-[var(--background)] border-b border-[var(--surface-border)] p-6 shadow-xl space-y-4"
+          className="lg:hidden relative z-50 border-t border-[var(--surface-border)] bg-[var(--background)] px-6 py-5 shadow-2xl space-y-4 animate-in fade-in slide-in-from-top-2 duration-200"
         >
           <div className="text-[10px] font-mono uppercase tracking-wider text-[var(--muted-text)] border-b border-[var(--surface-border)] pb-2 flex items-center justify-between">
             <span>Portfolio Sections</span>
             <span className="text-[var(--accent)]">INDEX</span>
           </div>
-          <nav className="flex flex-col space-y-2">
+          <nav className="flex flex-col space-y-1">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.label}

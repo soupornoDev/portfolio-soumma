@@ -68,7 +68,6 @@ export function ContactForm() {
         <span className="text-xs font-mono font-semibold uppercase text-[var(--accent)]">
           Direct Engineering Dispatch
         </span>
-        <span className="text-[11px] font-mono text-[var(--muted-text)]">PORT: HTTPS/SSL</span>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -158,9 +157,22 @@ export function ContactForm() {
         )}
 
         {status === "error" && (
-          <div className="p-3.5 rounded-lg bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-xs font-mono flex items-start gap-2">
-            <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-            <span>{feedback}</span>
+          <div className="p-3.5 rounded-lg bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-xs font-mono space-y-2">
+            <div className="flex items-start gap-2">
+              <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+              <span>{feedback}</span>
+            </div>
+            <div className="pt-1.5 border-t border-red-500/20 text-[11px] flex items-center justify-between">
+              <span>Direct fallback:</span>
+              <a
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=soummachakraborty.eng@gmail.com&su=${encodeURIComponent(formData.subject || "Mechanical / CNC Design Inquiry")}&body=${encodeURIComponent(formData.message || "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-red-700 dark:hover:text-red-300 font-semibold"
+              >
+                Send via Gmail Web &rarr;
+              </a>
+            </div>
           </div>
         )}
 
@@ -169,7 +181,7 @@ export function ContactForm() {
           ref={submitBtnRef}
           type="submit"
           disabled={status === "submitting"}
-          className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[var(--foreground)] text-[var(--background)] font-medium text-xs font-mono tracking-wider uppercase hover:opacity-90 disabled:opacity-50 transition-all active:scale-[0.99]"
+          className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[var(--foreground)] text-[var(--background)] font-medium text-xs font-mono tracking-wider uppercase hover:opacity-90 disabled:opacity-50 transition-all active:scale-[0.99] cursor-pointer"
         >
           {status === "submitting" ? (
             <>
@@ -179,7 +191,7 @@ export function ContactForm() {
           ) : (
             <>
               <Send className="w-4 h-4" />
-              <span>Transmit Message</span>
+              <span>Initiate Transmission / Send Message</span>
             </>
           )}
         </button>
