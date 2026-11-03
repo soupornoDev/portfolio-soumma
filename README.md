@@ -1,9 +1,8 @@
-
-Potfolio Soumma
+#Potfolio Soumma
 
 A modern, full-stack personal portfolio website designed to showcase projects, skills, and experience. Built with a dedicated backend to handle dynamic content management, contact form submissions, and analytics.
 
-🚀 Features
+##🚀 Features
 
 • Responsive Design: Optimized for a seamless experience across desktop, tablet, and mobile devices.
 • Dynamic Projects Showcase: Filter, search, and view detailed information about completed work.
