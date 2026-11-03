@@ -1,7 +1,7 @@
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { TechnicalBadge } from "@/components/ui/TechnicalBadge";
 import { PORTFOLIO_DATA } from "@/lib/portfolio-data";
-import { Briefcase, CheckCircle2, MapPin } from "lucide-react";
+import { Briefcase, CheckCircle2, ExternalLink, MapPin } from "lucide-react";
 
 export function Experience() {
   return (
@@ -9,13 +9,13 @@ export function Experience() {
       <ScrollReveal>
         <div className="flex flex-col items-start mb-12">
           <TechnicalBadge variant="neutral" icon={<Briefcase className="w-3.5 h-3.5" />}>
-            04 // Engineering Trajectory
+            04 // Professional Trajectory
           </TechnicalBadge>
           <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-[var(--foreground)] mt-3">
-            Practical Experience & Laboratory Projects
+            Industry Experience & Quality Engineering
           </h2>
           <p className="text-sm sm:text-base text-[var(--muted-text)] max-w-2xl mt-2">
-            Applied mechanical engineering project delivery, CNC machining setup, precision CAD modeling, and fabrication drawings.
+            Quality Assurance, CNC machine tool manufacturing, product development auditing, and process control.
           </p>
         </div>
       </ScrollReveal>
@@ -36,8 +36,19 @@ export function Experience() {
                     <h3 className="text-lg font-bold text-[var(--foreground)]">
                       {item.role}
                     </h3>
-                    <div className="text-xs font-mono text-[var(--accent)] font-semibold mt-0.5">
-                      {item.organization}
+                    <div className="text-xs font-mono text-[var(--accent)] font-semibold mt-0.5 flex items-center gap-1.5">
+                      <span>{item.organization}</span>
+                      {item.organizationUrl && (
+                        <a
+                          href={item.organizationUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline inline-flex items-center gap-0.5 text-[11px]"
+                          aria-label={`${item.organization} company link`}
+                        >
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      )}
                     </div>
                   </div>
                   <div className="flex flex-col sm:items-end text-xs font-mono text-[var(--muted-text)]">
@@ -64,7 +75,7 @@ export function Experience() {
 
                 <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-[var(--surface-border)]/60">
                   <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--muted-text)]">
-                    Environment:
+                    Core Focus & QC Tools:
                   </span>
                   {item.techStack.map((tech, tIdx) => (
                     <span

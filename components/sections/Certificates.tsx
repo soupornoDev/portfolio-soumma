@@ -12,10 +12,10 @@ export function Certificates() {
             06 // Verified Credentials
           </TechnicalBadge>
           <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-[var(--foreground)] mt-3">
-            Certifications & Technical Standards
+            Certifications & Technical Accreditations
           </h2>
           <p className="text-sm sm:text-base text-[var(--muted-text)] max-w-2xl mt-2">
-            Certified proficiency across 3D CAD modeling, multi-axis CNC programming, ASME Y14.5 drawing standards, and structural FEA.
+            Formal mechanical engineering qualifications, advanced post-graduate tool design diplomas, and specialized technical certifications from IIT Roorkee, IIT Kanpur, and IIT Kharagpur.
           </p>
         </div>
       </ScrollReveal>

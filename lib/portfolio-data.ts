@@ -24,6 +24,7 @@ export interface ExperienceItem {
   id: string;
   role: string;
   organization: string;
+  organizationUrl?: string;
   location: string;
   period: string;
   type: string;
@@ -36,19 +37,20 @@ export interface EducationItem {
   degree: string;
   field: string;
   institution: string;
+  institutionUrl?: string;
   period: string;
   location: string;
   highlights: string[];
-  coreSubjects: string[];
+  coreSubjects?: string[];
 }
 
 export interface CertificateItem {
   title: string;
   issuer: string;
-  year: string;
+  year?: string;
   credentialId?: string;
   skillsCovered: string[];
-  category: "CAD" | "CNC" | "Standards" | "Analysis";
+  category: "Degree" | "Tool Design" | "IIT / NPTEL" | "Standards" | "Analysis";
 }
 
 export const PORTFOLIO_DATA = {
@@ -187,7 +189,7 @@ export const PORTFOLIO_DATA = {
       drawingCode: "DWG-IM-MS-004",
       githubUrl: "https://github.com/soupornoDev/potfolio-soumma",
     },
-  ],
+  ] as Project[],
 
   skills: [
     {
@@ -258,95 +260,191 @@ export const PORTFOLIO_DATA = {
 
   experience: [
     {
-      id: "exp-1",
-      role: "Mechanical Design & CNC Engineering Trainee",
-      organization: "Precision Mechanical & Machine Tools Focus",
-      location: "India",
-      period: "Engineering Formation & Practical Studies",
-      type: "Academic & Applied Engineering",
+      id: "exp-jyoti-cnc",
+      role: "Quality Assurance Engineer",
+      organization: "Jyoti CNC Automation Ltd.",
+      organizationUrl: "https://www.linkedin.com/company/13664988/",
+      location: "Rajkot, Gujarat, India (Hybrid)",
+      period: "May 2023 – Aug 2025 · 2 yrs 4 mos",
+      type: "Full-time",
       description:
-        "Dedicated focus on the mechanical architecture, structural rigidity calculations, and manufacturing workflows of precision CNC machinery and custom tooling fixtures.",
+        "Quality Audit, CNC based Product development, and application of 7 QC tools in precision machine tool manufacturing and assembly at Jyoti CNC Automation Ltd.",
       achievements: [
-        "Synthesized parametric CAD models for multi-part mechanical assemblies with full associativity and DFM verification.",
-        "Produced production-grade engineering drawings compliant with ASME Y14.5 GD&T standards, featuring datum schemes, form tolerances, and runout limits.",
-        "Formulated G-code cutting strategies and simulated CAM toolpaths for 2.5D and 3D surface milling on aluminum and engineering plastics.",
-        "Performed linear static and modal FEA to verify factor of safety (> 2.5) and minimize vibrational deflection on machine structural frames.",
+        "Conducted comprehensive Quality Audits across CNC machine components, casting sub-structures, and machine assemblies.",
+        "Executed CNC-based product development and test-cut validations to verify dimensional accuracy, positioning repeatability, and surface finish.",
+        "Applied 7 QC tools (Cause-and-Effect diagrams, Pareto charts, Check sheets, Histograms, Scatter diagrams, Control charts, Stratification) for root cause analysis and defect prevention.",
+        "Conducted geometric accuracy inspections: spindle runout, axis backlash, squareness, and alignment adhering to precision machine tool standards.",
       ],
-      techStack: ["SolidWorks", "Fusion 360", "GD&T", "ANSYS", "G-Code", "CAM Toolpaths"],
-    },
-    {
-      id: "exp-2",
-      role: "CAD/CAM Mechanical Projects Specialist",
-      organization: "Laboratory & Prototyping Studio",
-      location: "India",
-      period: "Engineering Development Projects",
-      type: "Design & Prototyping",
-      description:
-        "Spearheaded technical development from concept requirements through kinematics calculations, mechanical drafting, component sourcing, and prototype validation.",
-      achievements: [
-        "Engineered zero-backlash rotary and linear sub-systems using harmonic drive and preloaded recirculating ball bearings.",
-        "Conducted worst-case and Root-Sum-Square (RSS) tolerance stack-up analyses across multi-component bearing assemblies.",
-        "Validated prototype dimensional conformance using micrometers, dial test indicators, and gauge blocks.",
-        "Documented detailed engineering bills of materials (BOM), standard operating procedures (SOP), and assembly guides.",
+      techStack: [
+        "Quality Auditing",
+        "CNC Manufacturing",
+        "7 QC Tools",
+        "Quality Control (QC)",
+        "Dimensional Inspection",
+        "Machine Tools",
       ],
-      techStack: ["SolidWorks", "AutoCAD", "Tolerance Stack-up", "Metrology", "DFM/DFA"],
     },
-  ],
+  ] as ExperienceItem[],
 
   education: [
     {
-      degree: "Bachelor of Technology (B.Tech)",
-      field: "Mechanical Engineering",
-      institution: "Mechanical Engineering Department",
-      period: "Undergraduate Engineering Curriculum",
-      location: "India",
+      degree: "Post Graduate Diploma in Tool Design and CAD CAM",
+      field: "Industrial and Product Design",
+      institution: "Central Tool Room and Training Centre (CTTC), Bhubaneswar",
+      institutionUrl: "https://www.linkedin.com/in/soumma-chakraborty-10b85a230/",
+      period: "Nov 2025 – Nov 2026",
+      location: "Bhubaneswar, Odisha, India",
       highlights: [
-        "Specialized academic focus in Machine Design, CNC Machining, Mechatronics, and Manufacturing Automation.",
-        "Hands-on workshop training across manual turning, milling, grinding, CNC machine operation, and quality inspection.",
-        "Capstone Project: Design, Analysis, and CAM Fabrication Validation of High-Precision CNC Machine Sub-Assemblies.",
+        "Specialized in advanced Tool Design: Plastic Injection Moulds, Sheet Metal Press Tools, Die Casting Dies, and Jigs & Fixtures.",
+        "Parametric CAD modeling and assembly drafting using Siemens NX and PTC Creo.",
+        "Industrial tooling standards, core/cavity extraction, strip layout design, and DFM methodologies.",
       ],
       coreSubjects: [
-        "Design of Machine Elements",
-        "Kinematics & Dynamics of Machinery",
-        "Manufacturing Technology & Metrology",
-        "Computer-Aided Design & Manufacturing (CAD/CAM)",
-        "Finite Element Methods in Engineering",
-        "Strength of Materials",
-        "Fluid Mechanics & Hydraulics/Pneumatics",
-        "Material Science & Metallurgy",
+        "Siemens NX",
+        "PTC Creo",
+        "Press Tool Design",
+        "Injection Mould Design",
+        "Die Casting Dies",
+        "Jigs & Fixtures",
+        "CAD/CAM",
+        "Industrial & Product Design",
       ],
     },
-  ],
+    {
+      degree: "Advance Certificate Course in CNC Machining",
+      field: "Mechanical Engineering & CNC Manufacturing",
+      institution: "MSME KOLKATA (MSME Technology Centre)",
+      institutionUrl: "https://www.linkedin.com/in/soumma-chakraborty-10b85a230/",
+      period: "May 2022 – May 2023",
+      location: "Kolkata, West Bengal, India",
+      highlights: [
+        "Extensive practical programming and operation of multi-axis CNC milling and turning machines.",
+        "CAM programming with Mastercam: 2D/3D toolpath creation, feeds/speeds calculation, and NC post-processing.",
+        "Hands-on workshop machining, tool setting, G-code/M-code verification, and part quality inspection.",
+      ],
+      coreSubjects: [
+        "Mastercam",
+        "CNC Manufacturing",
+        "CNC Milling & Turning",
+        "G-Code / M-Code Programming",
+        "Precision Metrology",
+        "Shopfloor Machining",
+      ],
+    },
+    {
+      degree: "Bachelor of Technology (B.Tech)",
+      field: "Mechanical Engineering",
+      institution: "FUTURE INSTITUTE OF TECHNOLOGY",
+      institutionUrl: "https://www.linkedin.com/school/15112105/",
+      period: "2017 – 2021",
+      location: "Kolkata, West Bengal, India",
+      highlights: [
+        "Four-year undergraduate degree program in Mechanical Engineering.",
+        "Design modeling and 2D detailing using SOLIDWORKS and AutoCAD.",
+        "Studied machine elements, mechanics of solids, manufacturing technology, thermodynamics, and fluid dynamics.",
+      ],
+      coreSubjects: [
+        "SOLIDWORKS",
+        "AutoCAD",
+        "Machine Design",
+        "Kinematics & Dynamics of Machinery",
+        "Manufacturing Technology",
+        "Strength of Materials",
+      ],
+    },
+    {
+      degree: "Higher Secondary (10+2)",
+      field: "Science Stream",
+      institution: "Harinavi D.V.A.S High School",
+      period: "2015 – 2017",
+      location: "Kolkata, West Bengal, India",
+      highlights: [
+        "Higher secondary education with a strong scientific foundation in Physics, Chemistry, and Mathematics.",
+      ],
+      coreSubjects: ["Physics", "Chemistry", "Mathematics"],
+    },
+    {
+      degree: "Secondary Education (10th Standard)",
+      field: "General Academic Curriculum",
+      institution: "Sri Ramakrishna Ashrama Institute",
+      period: "Completed Apr 2015",
+      location: "Kolkata, West Bengal, India",
+      highlights: [
+        "Secondary school education emphasizing mathematics, physical sciences, and academic fundamentals.",
+      ],
+    },
+  ] as EducationItem[],
 
   certificates: [
     {
-      title: "Certified SolidWorks Mechanical Design Professional",
-      issuer: "Dassault Systèmes / Certified Standard",
-      year: "Certified Competence",
-      credentialId: "CSWA / Mechanical Design",
-      category: "CAD",
-      skillsCovered: ["Parametric 3D Modeling", "Complex Assembly Mates", "Drafting & Exploded Views", "Mass Properties Analysis"],
+      title: "Mechanical Engineer",
+      issuer: "Future Institute of Technology, Kolkata",
+      year: "2017 – 2021",
+      category: "Degree",
+      skillsCovered: ["SOLIDWORKS", "AutoCAD", "Machine Design", "Manufacturing Technology"],
     },
     {
-      title: "CNC Programming, G-Code & CAM Masterclass",
-      issuer: "Industrial Machining & CAM Technical Training",
-      year: "Certified Training",
-      category: "CNC",
-      skillsCovered: ["G-Code / M-Code Syntax", "Cutter Compensation (G41/G42)", "Speeds & Feeds Optimization", "Fixture Offsets"],
+      title: "Post Graduate Diploma in Tool Design and CAD & CAM",
+      issuer: "Central Tool Room and Training Centre (CTTC), Bhubaneswar",
+      year: "2025 – 2026",
+      category: "Tool Design",
+      skillsCovered: ["Siemens NX", "PTC Creo", "Press Tool Design", "Injection Mould Design"],
     },
     {
-      title: "Geometric Dimensioning & Tolerancing (GD&T) per ASME Y14.5",
-      issuer: "Engineering Precision Standards",
-      year: "Technical Specialization",
-      category: "Standards",
-      skillsCovered: ["Datums & Feature Control Frames", "True Position & MMC/LMC", "Runout & Concentricity", "Profile of a Surface"],
+      title: "Tool & Machine Design: Injection Moulding, Jigs & Fixture, Die Casting, Press Tool",
+      issuer: "Tool Design & Manufacturing Specialization",
+      year: "Specialization",
+      category: "Tool Design",
+      skillsCovered: ["Injection Moulding", "Jigs & Fixture", "Die Casting", "Press Tool Design", "Product & Machine Design"],
     },
     {
-      title: "Finite Element Analysis (FEA) for Mechanical Engineers",
-      issuer: "Computational Mechanics & Simulation",
-      year: "Applied Analysis",
-      category: "Analysis",
-      skillsCovered: ["Static Structural Stress", "Modal & Vibration Analysis", "Mesh Convergence Studies", "Von Mises Criteria"],
+      title: "Certification on Principles of Casting Technology",
+      issuer: "IIT ROORKEE (NPTEL)",
+      year: "IIT Certified",
+      category: "IIT / NPTEL",
+      skillsCovered: ["Casting Technology", "Gating & Riser Design", "Moulding Sands", "Solidification & Defects"],
     },
-  ],
+    {
+      title: "Certification on Engineering Metrology",
+      issuer: "IIT KANPUR (NPTEL)",
+      year: "IIT Certified",
+      category: "IIT / NPTEL",
+      skillsCovered: ["Engineering Metrology", "Limits, Fits & Tolerances", "Surface Finish (Ra/Rz)", "CMM & Precision Gauging"],
+    },
+    {
+      title: "Certification on Automation in Production System and Management",
+      issuer: "IIT KHARAGPUR (NPTEL)",
+      year: "IIT Certified",
+      category: "IIT / NPTEL",
+      skillsCovered: ["Automation in Production", "CNC & Transfer Lines", "Production Management", "FMS & Industrial Robotics"],
+    },
+    {
+      title: "Certification on Principles of Industrial Engineering",
+      issuer: "IIT ROORKEE (NPTEL)",
+      year: "IIT Certified",
+      category: "IIT / NPTEL",
+      skillsCovered: ["Industrial Engineering", "Work Study & Method Study", "Facility Layout", "Productivity Optimization"],
+    },
+    {
+      title: "Certification on Manufacturing Guidelines for Product Design",
+      issuer: "IIT ROORKEE (NPTEL)",
+      year: "IIT Certified",
+      category: "IIT / NPTEL",
+      skillsCovered: ["DFM / DFA Guidelines", "Product Design for Tooling", "Material Selection", "Cost Optimization"],
+    },
+    {
+      title: "Certification on Operations Management",
+      issuer: "IIT ROORKEE (NPTEL)",
+      year: "IIT Certified",
+      category: "IIT / NPTEL",
+      skillsCovered: ["Operations Management", "Supply Chain Control", "Capacity Planning", "Quality Systems"],
+    },
+    {
+      title: "Certification on Toyota Production System",
+      issuer: "IIT ROORKEE (NPTEL)",
+      year: "IIT Certified",
+      category: "IIT / NPTEL",
+      skillsCovered: ["Toyota Production System (TPS)", "Lean Manufacturing", "Kaizen & 5S", "Waste Elimination (Muda)"],
+    },
+  ] as CertificateItem[],
 };
