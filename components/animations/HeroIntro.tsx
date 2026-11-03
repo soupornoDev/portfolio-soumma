@@ -70,7 +70,7 @@ export function HeroIntro() {
           <div className="hero-cta-btn flex flex-wrap items-center gap-3.5 w-full sm:w-auto mb-10">
             <Link
               href="#projects"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[var(--foreground)] text-[var(--background)] font-medium text-sm transition-all hover:opacity-90 active:scale-[0.98] shadow-sm"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[var(--foreground)] text-[var(--background)] font-medium text-sm transition-all hover:opacity-90 active:scale-[0.98] shadow-sm cursor-pointer"
             >
               <span>Explore Projects</span>
               <ArrowDownRight className="w-4 h-4" />
@@ -78,7 +78,7 @@ export function HeroIntro() {
 
             <Link
               href="#contact"
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-[var(--surface-border)] bg-[var(--surface)] text-[var(--foreground)] font-medium text-sm hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors active:scale-[0.98]"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-[var(--surface-border)] bg-[var(--surface)] text-[var(--foreground)] font-medium text-sm hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors active:scale-[0.98] cursor-pointer"
             >
               <Send className="w-4 h-4" />
               <span>Contact Engineer</span>
@@ -86,7 +86,7 @@ export function HeroIntro() {
 
             <a
               href="#skills"
-              className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-xs font-mono text-[var(--muted-text)] hover:text-[var(--foreground)] transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-xs font-mono text-[var(--muted-text)] hover:text-[var(--foreground)] transition-colors cursor-pointer"
             >
               <Wrench className="w-3.5 h-3.5" />
               <span>Technical Standards</span>

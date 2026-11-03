@@ -2,8 +2,15 @@
 
 import { useState, useRef, FormEvent } from "react";
 import anime from "animejs";
-import { Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { Send, CheckCircle2, AlertCircle, Loader2, RotateCcw } from "lucide-react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+
+interface FieldErrors {
+  name?: string;
+  email?: string;
+  subject?: string;
+  message?: string;
+}
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -12,6 +19,7 @@ export function ContactForm() {
     subject: "Mechanical / CNC Design Inquiry",
     message: "",
   });
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [feedback, setFeedback] = useState<string>("");
   const [transmissionCode, setTransmissionCode] = useState<string>("");
@@ -19,27 +27,79 @@ export function ContactForm() {
   const submitBtnRef = useRef<HTMLButtonElement>(null);
   const prefersReducedMotion = useReducedMotion();
 
+  const handleFieldChange = (field: "name" | "email" | "subject" | "message", value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    if (fieldErrors[field]) {
+      setFieldErrors((prev) => ({ ...prev, [field]: undefined }));
+    }
+    if (status === "error") {
+      setStatus("idle");
+      setFeedback("");
+    }
+  };
+
+  const validateForm = (): boolean => {
+    const errors: FieldErrors = {};
+
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      errors.name = "Full name is required (minimum 2 characters)";
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim() || !emailRegex.test(formData.email.trim())) {
+      errors.email = "Please enter a valid email address (e.g. name@company.com)";
+    }
+
+    if (!formData.message.trim() || formData.message.trim().length < 5) {
+      errors.message = "Message is required (minimum 5 characters)";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      setStatus("error");
+      setFeedback("Please fill out all required fields before transmitting.");
+      return false;
+    }
+
+    setFieldErrors({});
+    return true;
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
     setStatus("submitting");
     setFeedback("");
 
     if (!prefersReducedMotion && submitBtnRef.current) {
-      anime({
-        targets: submitBtnRef.current,
-        scale: [1, 0.96, 1],
-        duration: 300,
-        easing: "easeOutQuad",
-      });
+      try {
+        anime({
+          targets: submitBtnRef.current,
+          scale: [1, 0.96, 1],
+          duration: 300,
+          easing: "easeOutQuad",
+        });
+      } catch (err) {
+        console.warn("Submit button animation exception:", err);
+      }
     }
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
 
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
+        signal: controller.signal,
       });
 
+      clearTimeout(timeoutId);
       const data = await response.json();
 
       if (response.ok && data.success) {
@@ -52,14 +112,27 @@ export function ContactForm() {
           subject: "Mechanical / CNC Design Inquiry",
           message: "",
         });
+        setFieldErrors({});
       } else {
         setStatus("error");
-        setFeedback(data.error || "Failed to transmit message. Please check required fields.");
+        setFeedback(data.error || "Failed to transmit message. Please review the highlighted fields.");
       }
-    } catch {
+    } catch (err: unknown) {
+      clearTimeout(timeoutId);
       setStatus("error");
-      setFeedback("Network transmission failure. Please reach out directly via email.");
+      const isAbort = err instanceof Error && err.name === "AbortError";
+      setFeedback(
+        isAbort
+          ? "Transmission request timed out. Please send directly via Gmail below."
+          : "Network transmission error. Please reach out directly via Gmail below."
+      );
     }
+  };
+
+  const resetForm = () => {
+    setStatus("idle");
+    setFeedback("");
+    setFieldErrors({});
   };
 
   return (
@@ -70,7 +143,7 @@ export function ContactForm() {
         </span>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} noValidate className="space-y-4">
         {/* Name Field */}
         <div>
           <label
@@ -84,10 +157,17 @@ export function ContactForm() {
             type="text"
             required
             value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            onChange={(e) => handleFieldChange("name", e.target.value)}
             placeholder="e.g. Jane Doe / Engineering Lead"
-            className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--surface-border)] bg-[var(--surface-muted)] text-sm text-[var(--foreground)] placeholder:text-[var(--muted-text)] focus:outline-none focus:border-[var(--accent)] transition-colors"
+            className={`w-full px-3.5 py-2.5 rounded-lg border bg-[var(--surface-muted)] text-sm text-[var(--foreground)] placeholder:text-[var(--muted-text)] focus:outline-none transition-colors ${
+              fieldErrors.name
+                ? "border-red-500 focus:border-red-500"
+                : "border-[var(--surface-border)] focus:border-[var(--accent)]"
+            }`}
           />
+          {fieldErrors.name && (
+            <p className="text-[11px] font-mono text-red-500 mt-1">{fieldErrors.name}</p>
+          )}
         </div>
 
         {/* Email Field */}
@@ -103,10 +183,17 @@ export function ContactForm() {
             type="email"
             required
             value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            onChange={(e) => handleFieldChange("email", e.target.value)}
             placeholder="engineer@company.com"
-            className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--surface-border)] bg-[var(--surface-muted)] text-sm text-[var(--foreground)] placeholder:text-[var(--muted-text)] focus:outline-none focus:border-[var(--accent)] transition-colors"
+            className={`w-full px-3.5 py-2.5 rounded-lg border bg-[var(--surface-muted)] text-sm text-[var(--foreground)] placeholder:text-[var(--muted-text)] focus:outline-none transition-colors ${
+              fieldErrors.email
+                ? "border-red-500 focus:border-red-500"
+                : "border-[var(--surface-border)] focus:border-[var(--accent)]"
+            }`}
           />
+          {fieldErrors.email && (
+            <p className="text-[11px] font-mono text-red-500 mt-1">{fieldErrors.email}</p>
+          )}
         </div>
 
         {/* Subject */}
@@ -121,7 +208,7 @@ export function ContactForm() {
             id="contact-subject"
             type="text"
             value={formData.subject}
-            onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+            onChange={(e) => handleFieldChange("subject", e.target.value)}
             className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--surface-border)] bg-[var(--surface-muted)] text-sm text-[var(--foreground)] placeholder:text-[var(--muted-text)] focus:outline-none focus:border-[var(--accent)] transition-colors"
           />
         </div>
@@ -139,19 +226,39 @@ export function ContactForm() {
             rows={4}
             required
             value={formData.message}
-            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+            onChange={(e) => handleFieldChange("message", e.target.value)}
             placeholder="Detail your mechanical design requirements, CAD models, CNC inquiries, or recruitment details..."
-            className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--surface-border)] bg-[var(--surface-muted)] text-sm text-[var(--foreground)] placeholder:text-[var(--muted-text)] focus:outline-none focus:border-[var(--accent)] transition-colors resize-none"
+            className={`w-full px-3.5 py-2.5 rounded-lg border bg-[var(--surface-muted)] text-sm text-[var(--foreground)] placeholder:text-[var(--muted-text)] focus:outline-none transition-colors resize-none ${
+              fieldErrors.message
+                ? "border-red-500 focus:border-red-500"
+                : "border-[var(--surface-border)] focus:border-[var(--accent)]"
+            }`}
           />
+          {fieldErrors.message && (
+            <p className="text-[11px] font-mono text-red-500 mt-1">{fieldErrors.message}</p>
+          )}
         </div>
 
         {/* Status Alerts */}
         {status === "success" && (
-          <div className="p-3.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-mono flex items-start gap-2">
-            <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
-            <div>
-              <div className="font-bold">{feedback}</div>
-              <div className="text-[11px] opacity-90 mt-0.5">Reference ID: {transmissionCode}</div>
+          <div className="p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-mono space-y-2">
+            <div className="flex items-start gap-2">
+              <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
+              <div>
+                <div className="font-bold">{feedback}</div>
+                <div className="text-[11px] opacity-90 mt-0.5">Reference ID: {transmissionCode}</div>
+              </div>
+            </div>
+            <div className="pt-2 border-t border-emerald-500/20 flex items-center justify-between">
+              <span className="text-[11px] opacity-80">Thank you for reaching out.</span>
+              <button
+                type="button"
+                onClick={resetForm}
+                className="inline-flex items-center gap-1 font-bold underline hover:opacity-80 cursor-pointer"
+              >
+                <RotateCcw className="w-3 h-3" />
+                <span>Send another message</span>
+              </button>
             </div>
           </div>
         )}
@@ -181,7 +288,7 @@ export function ContactForm() {
           ref={submitBtnRef}
           type="submit"
           disabled={status === "submitting"}
-          className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[var(--foreground)] text-[var(--background)] font-medium text-xs font-mono tracking-wider uppercase hover:opacity-90 disabled:opacity-50 transition-all active:scale-[0.99] cursor-pointer"
+          className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-[var(--foreground)] text-[var(--background)] font-medium text-xs font-mono tracking-wider uppercase hover:opacity-90 disabled:opacity-50 transition-all active:scale-[0.99] cursor-pointer shadow-sm"
         >
           {status === "submitting" ? (
             <>

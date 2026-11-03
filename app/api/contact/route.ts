@@ -42,9 +42,9 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!message || typeof message !== "string" || message.trim().length < 10) {
+    if (!message || typeof message !== "string" || message.trim().length < 5) {
       return NextResponse.json(
-        { success: false, error: "Please provide detailed project requirements (minimum 10 characters)." },
+        { success: false, error: "Please enter your message (minimum 5 characters)." },
         { status: 400 }
       );
     }

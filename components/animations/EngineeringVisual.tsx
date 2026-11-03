@@ -69,10 +69,24 @@ export function EngineeringVisual() {
     });
   };
 
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!containerRef.current || !e.touches[0]) return;
+    const touch = e.touches[0];
+    const rect = containerRef.current.getBoundingClientRect();
+    const relX = ((touch.clientX - rect.left) / rect.width) * 320;
+    const relY = ((touch.clientY - rect.top) / rect.height) * 240;
+    setCoords({
+      x: parseFloat(Math.max(0, Math.min(320, relX)).toFixed(2)),
+      y: parseFloat(Math.max(0, Math.min(240, relY)).toFixed(2)),
+      z: -12.5,
+    });
+  };
+
   return (
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
+      onTouchMove={handleTouchMove}
       className="hero-visual-container relative w-full aspect-square max-w-[420px] mx-auto rounded-xl border border-[var(--surface-border)] bg-[var(--surface)] shadow-lg overflow-hidden flex flex-col justify-between p-4 group select-none"
     >
       {/* CAD Header Bar */}

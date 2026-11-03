@@ -174,7 +174,7 @@ export function ProjectCardMotion({ project }: ProjectCardMotionProps) {
         <button
           type="button"
           onClick={toggleExpand}
-          className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-[var(--accent)] hover:underline shrink-0"
+          className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-[var(--accent)] hover:underline shrink-0 cursor-pointer"
         >
           <span>{expanded ? "Collapse Spec" : "Technical Spec"}</span>
           <ChevronDown

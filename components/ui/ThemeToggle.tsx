@@ -50,7 +50,7 @@ export function ThemeToggle() {
       ref={buttonRef}
       onClick={handleToggle}
       type="button"
-      className="relative flex items-center justify-center w-9 h-9 rounded-md border border-[var(--surface-border)] bg-[var(--surface)] hover:border-[var(--accent)] text-[var(--foreground)] transition-colors focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
+      className="relative flex items-center justify-center w-9 h-9 rounded-md border border-[var(--surface-border)] bg-[var(--surface)] hover:border-[var(--accent)] text-[var(--foreground)] transition-colors focus:outline-none focus:ring-1 focus:ring-[var(--accent)] cursor-pointer"
       aria-label={isDark ? "Switch to light engineering theme" : "Switch to dark engineering theme"}
       title={isDark ? "Switch to light theme" : "Switch to dark theme"}
     >
