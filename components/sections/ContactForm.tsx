@@ -170,6 +170,9 @@ export function ContactForm() {
             id="contact-name"
             type="text"
             required
+            aria-required="true"
+            aria-invalid={!!fieldErrors.name}
+            aria-describedby={fieldErrors.name ? "contact-name-error" : undefined}
             value={formData.name}
             onChange={(e) => handleFieldChange("name", e.target.value)}
             placeholder="e.g. Jane Doe / Engineering Lead"
@@ -180,7 +183,7 @@ export function ContactForm() {
             }`}
           />
           {fieldErrors.name && (
-            <p className="text-[11px] font-mono text-red-500 mt-1">{fieldErrors.name}</p>
+            <p id="contact-name-error" role="alert" className="text-[11px] font-mono text-red-500 mt-1">{fieldErrors.name}</p>
           )}
         </div>
 
@@ -197,6 +200,9 @@ export function ContactForm() {
             id="contact-email"
             type="email"
             required
+            aria-required="true"
+            aria-invalid={!!fieldErrors.email}
+            aria-describedby={fieldErrors.email ? "contact-email-error" : undefined}
             value={formData.email}
             onChange={(e) => handleFieldChange("email", e.target.value)}
             placeholder="engineer@company.com"
@@ -207,7 +213,7 @@ export function ContactForm() {
             }`}
           />
           {fieldErrors.email && (
-            <p className="text-[11px] font-mono text-red-500 mt-1">{fieldErrors.email}</p>
+            <p id="contact-email-error" role="alert" className="text-[11px] font-mono text-red-500 mt-1">{fieldErrors.email}</p>
           )}
         </div>
 
@@ -241,6 +247,9 @@ export function ContactForm() {
             id="contact-message"
             rows={4}
             required
+            aria-required="true"
+            aria-invalid={!!fieldErrors.message}
+            aria-describedby={fieldErrors.message ? "contact-message-error" : undefined}
             value={formData.message}
             onChange={(e) => handleFieldChange("message", e.target.value)}
             placeholder="Detail your mechanical design requirements, CAD models, CNC inquiries, or recruitment details..."
@@ -251,7 +260,7 @@ export function ContactForm() {
             }`}
           />
           {fieldErrors.message && (
-            <p className="text-[11px] font-mono text-red-500 mt-1">{fieldErrors.message}</p>
+            <p id="contact-message-error" role="alert" className="text-[11px] font-mono text-red-500 mt-1">{fieldErrors.message}</p>
           )}
         </div>
 

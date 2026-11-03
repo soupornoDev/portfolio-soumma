@@ -111,9 +111,10 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden flex items-center justify-center w-9 h-9 rounded-md border border-[var(--surface-border)] bg-[var(--surface)] text-[var(--foreground)] hover:border-[var(--accent)] transition-colors"
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            className="lg:hidden flex items-center justify-center w-9 h-9 rounded-md border border-[var(--surface-border)] bg-[var(--surface)] text-[var(--foreground)] hover:border-[var(--accent)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation-drawer"
           >
             {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
@@ -132,7 +133,11 @@ export function Navbar() {
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
         <div
+          id="mobile-navigation-drawer"
           ref={mobileDrawerRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile Navigation"
           className="lg:hidden relative z-50 border-t border-[var(--surface-border)] bg-[var(--background)] px-6 py-5 shadow-2xl space-y-4 animate-in fade-in slide-in-from-top-2 duration-200"
         >
           <div className="text-[10px] font-mono uppercase tracking-wider text-[var(--muted-text)] border-b border-[var(--surface-border)] pb-2 flex items-center justify-between">

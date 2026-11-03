@@ -1,10 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
-import anime from "animejs";
 import { CheckCircle2, ChevronDown, Cpu, Layers, ShieldCheck } from "lucide-react";
 import { Project } from "@/lib/portfolio-data";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { CoordinateStamp } from "@/components/ui/CoordinateStamp";
 
 interface ProjectCardMotionProps {
@@ -14,37 +12,7 @@ interface ProjectCardMotionProps {
 
 export function ProjectCardMotion({ project }: ProjectCardMotionProps) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const arrowRef = useRef<SVGSVGElement>(null);
   const [expanded, setExpanded] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
-
-  const handleMouseEnter = () => {
-    if (prefersReducedMotion || !cardRef.current) return;
-
-    if (arrowRef.current) {
-      anime({
-        targets: arrowRef.current,
-        translateX: [0, 3],
-        translateY: [0, -3],
-        duration: 300,
-        easing: "easeOutQuad",
-      });
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (prefersReducedMotion || !cardRef.current) return;
-
-    if (arrowRef.current) {
-      anime({
-        targets: arrowRef.current,
-        translateX: 0,
-        translateY: 0,
-        duration: 300,
-        easing: "easeOutQuad",
-      });
-    }
-  };
 
   const toggleExpand = () => {
     setExpanded((prev) => !prev);
@@ -53,8 +21,6 @@ export function ProjectCardMotion({ project }: ProjectCardMotionProps) {
   return (
     <div
       ref={cardRef}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
       className="project-card group relative flex flex-col justify-between rounded-xl border border-[var(--surface-border)] bg-[var(--surface)] p-6 transition-all duration-300 hover:border-[var(--accent)] hover:shadow-md"
     >
       {/* Top Header: Drawing Code & Category */}
@@ -116,7 +82,12 @@ export function ProjectCardMotion({ project }: ProjectCardMotionProps) {
 
         {/* Expandable Technical Analysis Drawer */}
         {expanded && (
-          <div className="pt-4 mt-4 border-t border-[var(--surface-border)] space-y-4">
+          <div
+            id={`project-specs-${project.id}`}
+            role="region"
+            aria-label={`${project.title} technical specifications`}
+            className="pt-4 mt-4 border-t border-[var(--surface-border)] space-y-4"
+          >
             <div>
               <div className="text-xs font-mono font-semibold uppercase text-[var(--accent)] mb-2 flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5" />
@@ -174,7 +145,9 @@ export function ProjectCardMotion({ project }: ProjectCardMotionProps) {
         <button
           type="button"
           onClick={toggleExpand}
-          className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-[var(--accent)] hover:underline shrink-0 cursor-pointer"
+          aria-expanded={expanded}
+          aria-controls={`project-specs-${project.id}`}
+          className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-[var(--accent)] hover:underline shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-sm"
         >
           <span>{expanded ? "Collapse Spec" : "Technical Spec"}</span>
           <ChevronDown

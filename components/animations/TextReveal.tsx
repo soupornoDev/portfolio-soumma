@@ -52,9 +52,10 @@ export function TextReveal({
 
   const words = text.split(" ");
 
+  const Tag = Component as React.ElementType;
+
   return (
-    // @ts-expect-error dynamic component type
-    <Component ref={containerRef} className={className} aria-label={text}>
+    <Tag ref={containerRef} className={className} aria-label={text}>
       {words.map((word, idx) => (
         <span
           key={idx}
@@ -63,6 +64,6 @@ export function TextReveal({
           {word}
         </span>
       ))}
-    </Component>
+    </Tag>
   );
 }

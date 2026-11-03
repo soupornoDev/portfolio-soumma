@@ -64,10 +64,10 @@ export function HeroIntro() {
           </div>
 
           {/* Heading */}
-          <div className="space-y-1 mb-6">
-            <h2 className="hero-heading-line font-mono text-sm md:text-base font-semibold tracking-wider text-[var(--accent)] uppercase">
-              {PORTFOLIO_DATA.personal.name}
-            </h2>
+          <div className="space-y-2 mb-6">
+            <p className="hero-heading-line font-mono text-sm md:text-base font-semibold tracking-wider text-[var(--accent)] uppercase">
+              {PORTFOLIO_DATA.personal.name} — Mechanical Engineer
+            </p>
             <h1 className="hero-heading-line text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--foreground)] leading-[1.15]">
               Engineered for <br className="hidden sm:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--foreground)] via-[var(--accent)] to-[var(--foreground)]">
