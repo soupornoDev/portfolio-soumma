@@ -65,7 +65,7 @@ export const PORTFOLIO_DATA = {
     github: "https://github.com/soupornoDev",
     repoUrl: "https://github.com/soupornoDev/potfolio-soumma",
     linkedin: "https://linkedin.com/in/soumma-chakraborty",
-    cadSoftware: ["SolidWorks", "Autodesk Fusion 360", "AutoCAD", "PTC Creo"],
+    cadSoftware: ["SolidWorks", "Siemens NX", "Autodesk Fusion 360", "AutoCAD", "PTC Creo"],
     standards: ["ASME Y14.5", "ISO 2768-m", "DIN 7168", "ISO 1101"],
   },
 
@@ -195,7 +195,7 @@ export const PORTFOLIO_DATA = {
         { name: "AutoCAD (2D Drafting & Detailing)", tag: "Core" },
         { name: "PTC Creo Parametric", tag: "Familiar" },
         { name: "Sheet Metal & Weldments", tag: "Applied" },
-        { name: "Top-Down Skeleton Modeling", tag: "Advanced" },
+        { name: "NX", tag: "Advanced" },
       ],
     },
     {
@@ -215,7 +215,6 @@ export const PORTFOLIO_DATA = {
       categoryCode: "SK-03",
       skills: [
         { name: "GD&T (ASME Y14.5 / ISO 1101)", tag: "Core Standard" },
-        { name: "Tolerance Stack-Up (Worst-Case & RSS)", tag: "Precision" },
         { name: "DFM / DFA Principles", tag: "Production" },
         { name: "FEA Static Stress & Modal Analysis", tag: "Analytical" },
         { name: "Thermal Gradient Simulation", tag: "Applied" },
@@ -229,9 +228,6 @@ export const PORTFOLIO_DATA = {
         { name: "Precision Ball Screws & Lead Screws", tag: "Kinematics" },
         { name: "Linear Guide Rails & Carriages", tag: "Bearings" },
         { name: "Spindle Design & Bearing Preload", tag: "Assembly" },
-        { name: "Stepper & Closed-Loop Servo Drives", tag: "Mechatronics" },
-        { name: "Timing Belt & Harmonic Reducers", tag: "Power Trans." },
-        { name: "Backlash Compensation Systems", tag: "Precision" },
       ],
     },
     {
@@ -247,14 +243,11 @@ export const PORTFOLIO_DATA = {
       ],
     },
     {
-      title: "Computing & Technical Documentation",
+      title: "Technical Documentation & Management",
       categoryCode: "SK-06",
       skills: [
-        { name: "MATLAB / GNU Octave (Sizing Math)", tag: "Numerical" },
-        { name: "Python for Mechanical Computations", tag: "Scripting" },
         { name: "Technical Drawing & Revision Control", tag: "Standard" },
         { name: "Bill of Materials (BOM) Generation", tag: "Systems" },
-        { name: "Git & Version-Controlled Engineering Assets", tag: "Workflows" },
       ],
     },
   ],
