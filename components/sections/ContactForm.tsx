@@ -2,6 +2,7 @@
 
 import { useState, useRef, FormEvent } from "react";
 import { Send, CheckCircle2, AlertCircle, Loader2, RotateCcw } from "lucide-react";
+import { toast } from "@/components/ui/Toast";
 
 interface FieldErrors {
   name?: string;
@@ -59,6 +60,7 @@ export function ContactForm() {
       setFieldErrors(errors);
       setStatus("error");
       setFeedback("Please complete the required engineering specification fields.");
+      toast.warning("Specification Incomplete", "Please complete all highlighted mandatory fields.");
 
       if (errors.name) {
         nameInputRef.current?.focus();
@@ -109,6 +111,10 @@ export function ContactForm() {
         setStatus("success");
         setFeedback(data.message || "Message transmitted successfully.");
         setTransmissionCode(data.transmissionId || "TX-CONFIRMED");
+        toast.success(
+          "Dispatch Transmitted",
+          `Ref: ${data.transmissionId || "TX-CONFIRMED"} — Dispatch logged and delivered.`
+        );
         setFormData({
           name: "",
           email: "",
@@ -119,15 +125,16 @@ export function ContactForm() {
       } else {
         setStatus("error");
         setFeedback(data.error || "Failed to transmit message. Please review the highlighted fields.");
+        toast.error("Transmission Rejected", data.error || "Please verify credentials and fields.");
       }
     } catch (err: unknown) {
       setStatus("error");
       const isAbort = err instanceof Error && err.name === "AbortError";
-      setFeedback(
-        isAbort
-          ? "Transmission request timed out. Please send directly via Gmail below."
-          : "Network transmission error. Please reach out directly via Gmail below."
-      );
+      const errMsg = isAbort
+        ? "Transmission request timed out. Please send directly via Gmail below."
+        : "Network transmission error. Please reach out directly via Gmail below.";
+      setFeedback(errMsg);
+      toast.error(isAbort ? "Request Timed Out" : "Network Error", errMsg);
     } finally {
       clearTimeout(timeoutId);
       isSubmittingRef.current = false;

@@ -70,9 +70,8 @@ export function Navbar() {
             <Compass className="w-4 h-4" />
           </span>
           <div className="flex flex-col">
-            <span className="leading-tight text-xs uppercase tracking-wider font-bold">
-              <span className="hidden sm:inline">{PORTFOLIO_DATA.personal.name}</span>
-              <span className="sm:hidden">{PORTFOLIO_DATA.personal.shortName}</span>
+            <span className="leading-tight text-xs uppercase tracking-wider font-bold whitespace-nowrap">
+              {PORTFOLIO_DATA.personal.name}
             </span>
             <span className="text-[10px] text-[var(--muted-text)] font-normal tracking-tight">
               MECHANICAL &amp; CNC DESIGN

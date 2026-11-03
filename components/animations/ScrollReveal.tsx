@@ -27,7 +27,13 @@ export function ScrollReveal({
 
   useEffect(() => {
     const el = elementRef.current;
-    if (!el || prefersReducedMotion) return;
+    if (!el) return;
+
+    if (prefersReducedMotion) {
+      el.style.opacity = "";
+      el.style.transform = "";
+      return;
+    }
 
     // Calculate translation vector based on direction
     let tx = 0;
@@ -39,18 +45,6 @@ export function ScrollReveal({
 
     let animInstance: anime.AnimeInstance | null = null;
     let hasAnimated = false;
-
-    // Set initial hidden state for animation
-    if (!staggerChildrenSelector) {
-      el.style.opacity = "0";
-      el.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
-    } else {
-      const childTargets = el.querySelectorAll(staggerChildrenSelector);
-      childTargets.forEach((child) => {
-        (child as HTMLElement).style.opacity = "0";
-        (child as HTMLElement).style.transform = `translate3d(0, ${distance}px, 0)`;
-      });
-    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -68,8 +62,8 @@ export function ScrollReveal({
                   opacity: [0, 1],
                   translateY: [distance, 0],
                   scale: [0.98, 1],
-                  duration: 800,
-                  delay: anime.stagger(100, { start: delay }),
+                  duration: 650,
+                  delay: anime.stagger(80, { start: delay }),
                   easing: "cubicBezier(0.16, 1, 0.3, 1)",
                   complete: () => {
                     targets.forEach((t) => {
@@ -86,7 +80,7 @@ export function ScrollReveal({
                 opacity: [0, 1],
                 translateX: [tx, 0],
                 translateY: [ty, 0],
-                duration: 800,
+                duration: 650,
                 delay,
                 easing: "cubicBezier(0.16, 1, 0.3, 1)",
                 complete: () => {
@@ -102,7 +96,7 @@ export function ScrollReveal({
       },
       {
         threshold: 0.05,
-        rootMargin: "0px 0px 60px 0px",
+        rootMargin: "0px 0px 80px 0px",
       }
     );
 
@@ -113,9 +107,15 @@ export function ScrollReveal({
       if (animInstance) animInstance.pause();
       if (el) {
         removeAnime(el);
+        el.style.opacity = "";
+        el.style.transform = "";
         if (staggerChildrenSelector) {
           const targets = el.querySelectorAll(staggerChildrenSelector);
           removeAnime(targets);
+          targets.forEach((t) => {
+            (t as HTMLElement).style.opacity = "";
+            (t as HTMLElement).style.transform = "";
+          });
         }
       }
     };

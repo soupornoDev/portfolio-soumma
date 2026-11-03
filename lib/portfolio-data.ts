@@ -56,7 +56,7 @@ export interface CertificateItem {
 export const PORTFOLIO_DATA = {
   personal: {
     name: "Soumma Chakraborty",
-    shortName: "Soumma C.",
+    shortName: "Soumma Chakraborty",
     discipline: "Mechanical Engineering",
     specialization: "CNC Machine Design & Mechanical Design",
     tagline: "Precision Mechanical Design, Kinematics & CNC Machine Architecture",

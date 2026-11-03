@@ -15,13 +15,33 @@ export function HeroIntro() {
 
   useEffect(() => {
     const containerEl = containerRef.current;
-    if (!containerEl || prefersReducedMotion) return;
+    if (!containerEl) return;
+
+    if (prefersReducedMotion) {
+      const targets = containerEl.querySelectorAll(
+        ".hero-badge, .hero-heading-line, .hero-subtitle, .hero-description, .hero-cta-btn, .hero-metric-item, .hero-visual-container"
+      );
+      targets.forEach((t) => {
+        (t as HTMLElement).style.opacity = "";
+        (t as HTMLElement).style.transform = "";
+      });
+      return;
+    }
 
     const timeline = createHeroAnimation(containerEl);
 
     return () => {
       if (timeline) timeline.pause();
-      if (containerEl) removeAnime(containerEl);
+      if (containerEl) {
+        removeAnime(containerEl);
+        const targets = containerEl.querySelectorAll(
+          ".hero-badge, .hero-heading-line, .hero-subtitle, .hero-description, .hero-cta-btn, .hero-metric-item, .hero-visual-container"
+        );
+        targets.forEach((t) => {
+          (t as HTMLElement).style.opacity = "";
+          (t as HTMLElement).style.transform = "";
+        });
+      }
     };
   }, [prefersReducedMotion]);
 

@@ -98,6 +98,15 @@ export function createHeroAnimation(container: HTMLElement): anime.AnimeTimeline
         opacity: [0, 1],
         scale: [0.94, 1],
         duration: 1000,
+        complete: () => {
+          const targets = container.querySelectorAll(
+            ".hero-badge, .hero-heading-line, .hero-subtitle, .hero-description, .hero-cta-btn, .hero-metric-item, .hero-visual-container"
+          );
+          targets.forEach((t) => {
+            (t as HTMLElement).style.opacity = "";
+            (t as HTMLElement).style.transform = "";
+          });
+        },
       },
       "-=800"
     );

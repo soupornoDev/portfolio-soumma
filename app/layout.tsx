@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ToastContainer } from "@/components/ui/Toast";
 import { PORTFOLIO_DATA } from "@/lib/portfolio-data";
 
 const geistSans = Geist({
@@ -55,6 +56,7 @@ export default function RootLayout({
           <Navbar />
           <main className="flex-1 flex flex-col">{children}</main>
           <Footer />
+          <ToastContainer />
         </ThemeProvider>
       </body>
     </html>
