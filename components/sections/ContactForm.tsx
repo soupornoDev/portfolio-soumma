@@ -1,9 +1,7 @@
 "use client";
 
 import { useState, useRef, FormEvent } from "react";
-import anime from "animejs";
 import { Send, CheckCircle2, AlertCircle, Loader2, RotateCcw } from "lucide-react";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface FieldErrors {
   name?: string;
@@ -25,7 +23,10 @@ export function ContactForm() {
   const [transmissionCode, setTransmissionCode] = useState<string>("");
 
   const submitBtnRef = useRef<HTMLButtonElement>(null);
-  const prefersReducedMotion = useReducedMotion();
+  const nameInputRef = useRef<HTMLInputElement>(null);
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const messageInputRef = useRef<HTMLTextAreaElement>(null);
+  const isSubmittingRef = useRef<boolean>(false);
 
   const handleFieldChange = (field: "name" | "email" | "subject" | "message", value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -47,17 +48,26 @@ export function ContactForm() {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim() || !emailRegex.test(formData.email.trim())) {
-      errors.email = "Please enter a valid email address (e.g. name@company.com)";
+      errors.email = "Please enter a valid corporate or personal email";
     }
 
     if (!formData.message.trim() || formData.message.trim().length < 5) {
-      errors.message = "Message is required (minimum 5 characters)";
+      errors.message = "Message specification is required (minimum 5 characters)";
     }
 
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
       setStatus("error");
-      setFeedback("Please fill out all required fields before transmitting.");
+      setFeedback("Please complete the required engineering specification fields.");
+
+      if (errors.name) {
+        nameInputRef.current?.focus();
+      } else if (errors.email) {
+        emailInputRef.current?.focus();
+      } else if (errors.message) {
+        messageInputRef.current?.focus();
+      }
+
       return false;
     }
 
@@ -65,28 +75,22 @@ export function ContactForm() {
     return true;
   };
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e?: FormEvent | React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+    }
+
+    if (isSubmittingRef.current || status === "submitting") {
+      return;
+    }
 
     if (!validateForm()) {
       return;
     }
 
+    isSubmittingRef.current = true;
     setStatus("submitting");
     setFeedback("");
-
-    if (!prefersReducedMotion && submitBtnRef.current) {
-      try {
-        anime({
-          targets: submitBtnRef.current,
-          scale: [1, 0.96, 1],
-          duration: 300,
-          easing: "easeOutQuad",
-        });
-      } catch (err) {
-        console.warn("Submit button animation exception:", err);
-      }
-    }
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 15000);
@@ -99,7 +103,6 @@ export function ContactForm() {
         signal: controller.signal,
       });
 
-      clearTimeout(timeoutId);
       const data = await response.json();
 
       if (response.ok && data.success) {
@@ -118,7 +121,6 @@ export function ContactForm() {
         setFeedback(data.error || "Failed to transmit message. Please review the highlighted fields.");
       }
     } catch (err: unknown) {
-      clearTimeout(timeoutId);
       setStatus("error");
       const isAbort = err instanceof Error && err.name === "AbortError";
       setFeedback(
@@ -126,6 +128,9 @@ export function ContactForm() {
           ? "Transmission request timed out. Please send directly via Gmail below."
           : "Network transmission error. Please reach out directly via Gmail below."
       );
+    } finally {
+      clearTimeout(timeoutId);
+      isSubmittingRef.current = false;
     }
   };
 
@@ -133,6 +138,7 @@ export function ContactForm() {
     setStatus("idle");
     setFeedback("");
     setFieldErrors({});
+    nameInputRef.current?.focus();
   };
 
   return (
@@ -153,6 +159,7 @@ export function ContactForm() {
             Full Name <span className="text-red-500">*</span>
           </label>
           <input
+            ref={nameInputRef}
             id="contact-name"
             type="text"
             required
@@ -179,6 +186,7 @@ export function ContactForm() {
             Email Address <span className="text-red-500">*</span>
           </label>
           <input
+            ref={emailInputRef}
             id="contact-email"
             type="email"
             required
@@ -222,6 +230,7 @@ export function ContactForm() {
             Engineering Specification / Message <span className="text-red-500">*</span>
           </label>
           <textarea
+            ref={messageInputRef}
             id="contact-message"
             rows={4}
             required
@@ -287,13 +296,14 @@ export function ContactForm() {
         <button
           ref={submitBtnRef}
           type="submit"
+          onClick={handleSubmit}
           disabled={status === "submitting"}
-          className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-[var(--foreground)] text-[var(--background)] font-medium text-xs font-mono tracking-wider uppercase hover:opacity-90 disabled:opacity-50 transition-all active:scale-[0.99] cursor-pointer shadow-sm"
+          className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-[var(--foreground)] text-[var(--background)] font-medium text-xs font-mono tracking-wider uppercase hover:opacity-90 disabled:opacity-50 transition-all active:scale-[0.98] cursor-pointer shadow-sm select-none"
         >
           {status === "submitting" ? (
             <>
               <Loader2 className="w-4 h-4 animate-spin" />
-              <span>Transmitting Inquiry...</span>
+              <span>Transmitting Inquiry to Soumma...</span>
             </>
           ) : (
             <>
