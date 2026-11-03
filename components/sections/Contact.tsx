@@ -3,7 +3,7 @@ import { TechnicalBadge } from "@/components/ui/TechnicalBadge";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { PORTFOLIO_DATA } from "@/lib/portfolio-data";
 import { LinkedinIcon } from "@/components/ui/Icons";
-import { Mail, MapPin, Radio } from "lucide-react";
+import { Mail, MapPin, Radio, ExternalLink } from "lucide-react";
 
 export function Contact() {
   return (
@@ -30,16 +30,21 @@ export function Contact() {
               Direct Communication Channels
             </div>
 
-            {/* Email */}
+            {/* Direct Email (Redirects to Gmail Compose) */}
             <a
-              href={`mailto:${PORTFOLIO_DATA.personal.email}`}
+              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(PORTFOLIO_DATA.personal.email)}&su=${encodeURIComponent("Mechanical / CNC Design Inquiry - Soumma Chakraborty")}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-start gap-3 p-3 rounded-lg bg-[var(--surface-muted)]/60 border border-[var(--surface-border)] hover:border-[var(--accent)] transition-colors group"
             >
               <div className="p-2 rounded bg-[var(--surface)] text-[var(--accent)]">
                 <Mail className="w-4 h-4" />
               </div>
-              <div className="flex flex-col">
-                <span className="text-[11px] font-mono text-[var(--muted-text)]">Direct Email</span>
+              <div className="flex flex-col flex-1">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-mono text-[var(--muted-text)]">Direct Email (Gmail)</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-[var(--muted-text)] group-hover:text-[var(--accent)] transition-colors" />
+                </div>
                 <span className="text-xs sm:text-sm font-semibold text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors break-all">
                   {PORTFOLIO_DATA.personal.email}
                 </span>

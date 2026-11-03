@@ -71,9 +71,11 @@ export function Footer() {
                 <LinkedinIcon className="w-4 h-4" />
               </a>
               <a
-                href={`mailto:${PORTFOLIO_DATA.personal.email}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(PORTFOLIO_DATA.personal.email)}&su=${encodeURIComponent("Mechanical / CNC Design Inquiry - Soumma Chakraborty")}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-8 h-8 rounded-md border border-[var(--surface-border)] bg-[var(--surface-muted)] flex items-center justify-center text-[var(--foreground)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors"
-                aria-label="Email Soumma Chakraborty"
+                aria-label="Email Soumma Chakraborty via Gmail"
               >
                 <Mail className="w-4 h-4" />
               </a>
