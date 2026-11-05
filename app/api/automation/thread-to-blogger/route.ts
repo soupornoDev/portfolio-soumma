@@ -36,8 +36,13 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
   }
 
+  const hasAccessToken = Boolean(process.env.THREADS_ACCESS_TOKEN?.trim());
   const configStatus = {
-    threadsConfigured: Boolean(process.env.THREADS_ACCESS_TOKEN),
+    threadsIngestionMode: hasAccessToken
+      ? "Meta Graph API (Access Token present)"
+      : "Tokenless Web Engine (Direct Scraping - No Token Required)",
+    threadsConfigured: true, // Always ready via tokenless engine
+    targetAccount: process.env.THREADS_USERNAME || "@_s_o_u_m_m_a_",
     geminiConfigured: Boolean(process.env.GEMINI_API_KEY),
     geminiModel: process.env.GEMINI_MODEL || "gemini-2.5-flash",
     bloggerConfigured: Boolean(process.env.BLOGGER_BLOG_ID),
@@ -51,8 +56,8 @@ export async function GET(req: NextRequest) {
 
   return NextResponse.json({
     status: "READY",
-    service: "Threads to Blogger Automation Pipeline",
-    targetAccount: "@_s_o_u_m_m_a_",
+    service: "Threads to Blogger Automation Pipeline (Tokenless Supported)",
+    targetAccount: process.env.THREADS_USERNAME || "@_s_o_u_m_m_a_",
     config: configStatus,
     recentRunsCount: logs.length,
     recentRuns: logs.slice(0, 10),
@@ -61,6 +66,11 @@ export async function GET(req: NextRequest) {
 
 /**
  * POST: Execute the Threads -> Gemini -> Blogger -> Notification Pipeline
+ *
+ * Trigger Modes:
+ * 1. Automatic: Empty body {} fetches latest post from @_s_o_u_m_m_a_ without any token
+ * 2. Specific Post URL: { "url": "https://www.threads.net/@_s_o_u_m_m_a_/post/..." } or ?url=...
+ * 3. Webhook / Custom Payload: { "text": "...", "mediaUrls": [...] }
  */
 export async function POST(req: NextRequest) {
   const startTime = Date.now();
@@ -73,12 +83,18 @@ export async function POST(req: NextRequest) {
   try {
     requestBody = (await req.json()) as Record<string, unknown>;
   } catch {
-    // Empty body is valid: triggers fetching latest live Thread
+    // Empty body is valid: triggers fetching latest live Thread automatically
     requestBody = {};
   }
 
+  // Check URL query param if not in body
+  const queryUrl = req.nextUrl.searchParams.get("url");
+  if (queryUrl && !requestBody.url) {
+    requestBody.url = queryUrl;
+  }
+
   try {
-    // STEP 1: Get Thread Post (from payload or Threads Graph API)
+    // STEP 1: Get Thread Post (Tokenless Scraper, Post URL, or Webhook Payload)
     const { post, error: threadError } = await getLatestThreadPost(requestBody);
 
     if (threadError || !post) {
@@ -120,7 +136,9 @@ export async function POST(req: NextRequest) {
     const article = await generateBlogFromThread(post.text, media);
 
     // STEP 4 & 5: Upload/Embed Media & Create Blogger Post (Draft by default)
-    const publishLive = Boolean(requestBody.publishLive || req.nextUrl.searchParams.get("publish") === "true");
+    const publishLive = Boolean(
+      requestBody.publishLive || req.nextUrl.searchParams.get("publish") === "true"
+    );
 
     const bloggerResult = await createBloggerPost({
       title: article.title,
@@ -162,6 +180,7 @@ export async function POST(req: NextRequest) {
         id: post.id,
         permalink: post.permalink,
         mediaCount: media.length,
+        mode: process.env.THREADS_ACCESS_TOKEN ? "graph_api" : "tokenless_web",
       },
       article: {
         title: article.title,
