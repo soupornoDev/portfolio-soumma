@@ -6,8 +6,20 @@ import { ArrowDownRight, Compass, Send, Wrench, Download } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/lib/portfolio-data";
 import { createHeroAnimation, removeAnime } from "@/lib/animations";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import dynamic from "next/dynamic";
 import { TechnicalBadge } from "@/components/ui/TechnicalBadge";
-import { EngineeringVisual } from "@/components/animations/EngineeringVisual";
+
+const EngineeringVisual = dynamic(
+  () => import("@/components/animations/EngineeringVisual").then((mod) => mod.EngineeringVisual),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full aspect-square max-w-[420px] mx-auto rounded-xl border border-[var(--surface-border)] bg-[var(--surface)] flex items-center justify-center p-4">
+        <div className="text-xs font-mono text-[var(--muted-text)]">CNC_VIEWPORT_3D // Loading CAD Visualizer...</div>
+      </div>
+    ),
+  }
+);
 
 export function HeroIntro() {
   const containerRef = useRef<HTMLDivElement>(null);

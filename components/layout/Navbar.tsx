@@ -11,6 +11,7 @@ import { removeAnime } from "@/lib/animations";
 
 const NAV_LINKS = [
   { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },

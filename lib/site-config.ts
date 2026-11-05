@@ -84,10 +84,7 @@ const PERSON_NAME = PORTFOLIO_DATA.personal.name;
 const SITE_NAME = PERSON_NAME;
 
 const SITE_DESCRIPTION =
-  `${PERSON_NAME} — Mechanical Engineer specializing in ` +
-  "precision machine design, CNC machine architecture, CAD/CAM " +
-  "(SolidWorks, Siemens NX, Creo), GD&T, press tool design, " +
-  "injection mould design, and ANSYS FEA simulation.";
+  "Soumma Chakraborty — Mechanical Engineer specializing in CNC machine design, CAD/CAM (SolidWorks, Siemens NX, Creo), GD&T, press tools & ANSYS FEA.";
 
 // ------------------------------------------------------------
 // 3. SEO Configuration
@@ -97,14 +94,12 @@ export const SITE_CONFIG = {
   // Website identity
   name: SITE_NAME,
 
-  // Page titles
-  title:
-    `${PERSON_NAME} | Mechanical Engineer — ` +
-    "CNC Machine Design & Precision Systems",
+  // Page titles (49 chars for default title, 50-60 chars target)
+  title: "Soumma Chakraborty | CNC Machine Design Engineer",
 
   titleTemplate: `%s | ${PERSON_NAME}`,
 
-  // Search engine description
+  // Search engine description (exact 147 chars)
   description: SITE_DESCRIPTION,
 
   // Canonical website URL

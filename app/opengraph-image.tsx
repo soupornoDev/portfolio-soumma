@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { PORTFOLIO_DATA } from "@/lib/portfolio-data";
 import { SITE_URL } from "@/lib/site-config";
 
-export const alt = "Soumma Chakraborty | Mechanical Engineer — CNC Machine Design";
+export const alt = "Soumma Chakraborty | CNC Machine Design Engineer";
 export const size = {
   width: 1200,
   height: 630,

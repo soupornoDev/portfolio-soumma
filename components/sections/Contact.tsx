@@ -1,9 +1,22 @@
+import dynamic from "next/dynamic";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { TechnicalBadge } from "@/components/ui/TechnicalBadge";
-import { ContactForm } from "@/components/sections/ContactForm";
 import { PORTFOLIO_DATA } from "@/lib/portfolio-data";
 import { LinkedinIcon } from "@/components/ui/Icons";
 import { Mail, Phone, MapPin, Radio, ExternalLink } from "lucide-react";
+
+const ContactForm = dynamic(
+  () => import("@/components/sections/ContactForm").then((mod) => mod.ContactForm),
+  {
+    loading: () => (
+      <div className="rounded-xl border border-[var(--surface-border)] bg-[var(--surface)] p-6 sm:p-8 shadow-sm flex items-center justify-center min-h-[380px]">
+        <div className="text-xs font-mono text-[var(--muted-text)]">
+          INITIALIZING DIRECT ENGINEERING DISPATCH...
+        </div>
+      </div>
+    ),
+  }
+);
 
 export function Contact() {
   return (

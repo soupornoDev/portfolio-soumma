@@ -8,7 +8,7 @@ import { LinkedinIcon } from "@/components/ui/Icons";
 
 export const metadata: Metadata = {
   title: "Curriculum Vitae (CV) & Resume",
-  description: `Official Curriculum Vitae and Engineering Resume of ${PORTFOLIO_DATA.personal.name} — Mechanical Engineer specializing in CNC machine design, CAD/CAM, GD&T, and FEA simulation.`,
+  description: `Official Curriculum Vitae & Resume of ${PORTFOLIO_DATA.personal.name} — Mechanical Engineer specializing in CNC machine design, CAD/CAM, GD&T, and FEA simulation.`,
   alternates: {
     canonical: "/cv",
   },
