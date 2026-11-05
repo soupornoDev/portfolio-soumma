@@ -99,10 +99,10 @@ export function HeroIntro() {
           </p>
 
           {/* CTA Buttons */}
-          <div className="hero-cta-btn flex flex-wrap items-center gap-3.5 w-full sm:w-auto mb-10">
+          <div className="hero-cta-btn flex flex-wrap items-center gap-3 w-full sm:w-auto mb-10">
             <Link
               href="#projects"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[var(--foreground)] text-[var(--background)] font-medium text-sm transition-all hover:opacity-90 active:scale-[0.98] shadow-sm cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[var(--foreground)] text-[var(--background)] font-medium text-sm transition-all hover:opacity-90 active:scale-[0.98] shadow-sm cursor-pointer"
             >
               <span>Explore Projects</span>
               <ArrowDownRight className="w-4 h-4" />
@@ -110,7 +110,7 @@ export function HeroIntro() {
 
             <Link
               href="#contact"
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-[var(--surface-border)] bg-[var(--surface)] text-[var(--foreground)] font-medium text-sm hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors active:scale-[0.98] cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-[var(--surface-border)] bg-[var(--surface)] text-[var(--foreground)] font-medium text-sm hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors active:scale-[0.98] cursor-pointer"
             >
               <Send className="w-4 h-4" />
               <span>Contact Engineer</span>
@@ -119,7 +119,7 @@ export function HeroIntro() {
             <a
               href="/Soumma_Chakraborty_CV.pdf"
               download="Soumma_Chakraborty_CV.pdf"
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-[var(--accent)]/50 bg-[var(--accent-light)] text-[var(--accent)] font-medium text-sm hover:bg-[var(--accent)] hover:text-white transition-all active:scale-[0.98] shadow-xs cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-[var(--accent)]/50 bg-[var(--accent-light)] text-[var(--accent)] font-medium text-sm hover:bg-[var(--accent)] hover:text-white transition-all active:scale-[0.98] shadow-xs cursor-pointer"
               title="Download Soumma Chakraborty's Official Curriculum Vitae (PDF)"
               aria-label="Download CV (PDF)"
             >
@@ -129,7 +129,7 @@ export function HeroIntro() {
 
             <Link
               href="#skills"
-              className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-xs font-mono text-[var(--muted-text)] hover:text-[var(--foreground)] transition-colors cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs font-mono text-[var(--muted-text)] hover:text-[var(--foreground)] transition-colors cursor-pointer"
             >
               <Wrench className="w-3.5 h-3.5" />
               <span>Technical Standards</span>

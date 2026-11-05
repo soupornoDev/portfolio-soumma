@@ -145,6 +145,7 @@ export default function RootLayout({
       className={`
         ${geistSans.variable}
         ${geistMono.variable}
+        font-sans
         scroll-smooth
         h-full
         antialiased
@@ -155,6 +156,7 @@ export default function RootLayout({
           min-h-full
           flex
           flex-col
+          font-sans
           bg-[var(--background)]
           text-[var(--foreground)]
           selection:bg-[var(--accent)]
