@@ -187,6 +187,7 @@ flowchart TD
 Project Structure
 
 The following is an illustrative structure. The actual repository may contain additional modules.
+```
 
 portfolio-soumma/
 │
@@ -219,6 +220,7 @@ portfolio-soumma/
 ├── next.config.ts
 ├── .gitignore
 └── README.md
+```
 
 ---
 
