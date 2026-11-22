@@ -1,22 +1,24 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL, SITE_CONFIG } from "@/lib/site-config";
 
-/**
- * Dynamic Next.js Sitemap implementation
- * Generates standards-compliant XML sitemap for search engines.
- */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date(SITE_CONFIG.lastModifiedDate);
+  const baseUrl = SITE_URL.replace(/\/$/, "");
+  const parsedDate = new Date(SITE_CONFIG.lastModifiedDate);
+  const lastModified = Number.isNaN(parsedDate.getTime())
+    ? new Date()
+    : parsedDate;
 
   return [
     {
-      url: SITE_URL,
+      url: baseUrl,
       lastModified,
       changeFrequency: "weekly",
       priority: 1.0,
+      // public/ folder-e OG image thakle exact filename dao (na thakle ei images line-ta remove koro)
+      images: [`${baseUrl}/og-image.png`],
     },
     {
-      url: `${SITE_URL}/cv`,
+      url: `${baseUrl}/cv`,
       lastModified,
       changeFrequency: "monthly",
       priority: 0.9,
