@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import "./globals.css";
 import { SITE_URL } from "@/lib/site-config";
 
 const baseUrl = SITE_URL.replace(/\/$/, "");
@@ -135,8 +137,20 @@ const jsonLd = {
   ],
 };
 
-// RootLayout er <body> er vitore ei script tag-ta render korbe:
-// <script
-//   type="application/ld+json"
-//   dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-// />
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
+    </html>
+  );
+}
