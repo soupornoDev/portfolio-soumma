@@ -1,218 +1,142 @@
-
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
+import { SITE_URL } from "@/lib/site-config";
 
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-
-import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { ToastContainer } from "@/components/ui/Toast";
-import { JsonLd } from "@/components/seo/JsonLd";
-
-import { PORTFOLIO_DATA } from "@/lib/portfolio-data";
-import { SITE_URL, SITE_CONFIG } from "@/lib/site-config";
-
-// --------------------------------------------------
-// Fonts
-// --------------------------------------------------
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-// --------------------------------------------------
-// Site identity
-// --------------------------------------------------
-
-const siteName = PORTFOLIO_DATA.personal.name;
-const siteUrl = SITE_URL.replace(/\/+$/, "");
-
-const siteDescription = SITE_CONFIG.description;
-
-// --------------------------------------------------
-// SEO Metadata
-// --------------------------------------------------
+const baseUrl = SITE_URL.replace(/\/$/, "");
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-
-  applicationName: siteName,
-
+  metadataBase: new URL(baseUrl),
   title: {
-    default: SITE_CONFIG.title,
-    template: SITE_CONFIG.titleTemplate,
+    default: "Soumma Chakraborty | Mechanical & CNC Design Engineer",
+    template: "%s | Soumma Chakraborty",
   },
-
-  description: siteDescription,
-
-  keywords: [...SITE_CONFIG.keywords],
-
-  authors: [
-    {
-      name: siteName,
-      url: siteUrl,
-    },
-  ],
-
-  creator: siteName,
-  publisher: siteName,
-
-  category: "Mechanical Engineering & CNC Machine Design",
-
+  description:
+    "Mechanical Engineer specializing in CNC machine design, CAD/CAM (SolidWorks, Siemens NX, Creo, Mastercam), GD&T (ASME Y14.5), ANSYS FEA, and tool design.",
+  applicationName: "Soumma Chakraborty",
+  authors: [{ name: "Soumma Chakraborty", url: baseUrl }],
   alternates: {
-    canonical: "/",
+    canonical: baseUrl,
   },
-
-  // Search engine indexing
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
-      "max-image-preview": "large",
       "max-snippet": -1,
+      "max-image-preview": "large",
       "max-video-preview": -1,
     },
   },
-
-  // Browser behavior
-  referrer: "strict-origin-when-cross-origin",
-
-  formatDetection: {
-    telephone: false,
-    email: false,
-    address: false,
-  },
-
-  // Google Search Console verification
-  verification: {
-    google: SITE_CONFIG.googleVerificationToken,
-  },
-
-  // Open Graph / Facebook / LinkedIn
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: siteUrl,
-    siteName,
-    title: SITE_CONFIG.title,
-    description: siteDescription,
-
-    images: [
-      {
-        url: "/opengraph-image",
-        width: 1200,
-        height: 630,
-        alt: `${siteName} | CNC Machine Design Engineer`,
-        type: "image/png",
-      },
-    ],
-  },
-
-  // Twitter / X
-  twitter: {
-    card: "summary_large_image",
-    title: SITE_CONFIG.title,
-    description: siteDescription,
-    images: ["/opengraph-image"],
+    type: "profile",
+    url: baseUrl,
+    siteName: "Soumma Chakraborty",
+    title: "Soumma Chakraborty | Mechanical & CNC Design Engineer",
+    description:
+      "CNC Machine Architecture, Tool Design (Press Tool & Injection Mould), CAD/CAM, and Precision Manufacturing Engineering Portfolio.",
+    locale: "en_IN",
   },
 };
 
-// --------------------------------------------------
-// Root Layout
-// --------------------------------------------------
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${baseUrl}/#website`,
+      url: baseUrl,
+      name: "Soumma Chakraborty",
+      alternateName: [
+        "Soumma Chakraborty Portfolio",
+        "Soumma Chakraborty Mechanical Engineer",
+      ],
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": `${baseUrl}/#profilepage`,
+      url: baseUrl,
+      name: "Soumma Chakraborty — Mechanical & CNC Machine Design Portfolio",
+      isPartOf: { "@id": `${baseUrl}/#website` },
+      mainEntity: { "@id": `${baseUrl}/#person` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${baseUrl}/#person`,
+      name: "Soumma Chakraborty",
+      url: baseUrl,
+      email: "mailto:soummachakraborty1999@gmail.com",
+      jobTitle: "Mechanical Engineer — CNC Machine & Tool Design",
+      description:
+        "Mechanical Engineer specializing in CNC machine architecture, press tools, plastic injection moulds, GD&T (ASME Y14.5), ANSYS FEA, and CAD/CAM.",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Kolkata",
+        addressRegion: "West Bengal",
+        addressCountry: "IN",
+      },
+      alumniOf: [
+        {
+          "@type": "EducationalOrganization",
+          name: "Central Tool Room and Training Centre (CTTC), Bhubaneswar",
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "Future Institute of Technology, Kolkata",
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "MSME Technology Centre, Kolkata",
+        },
+      ],
+      worksFor: {
+        "@type": "Organization",
+        name: "Jyoti CNC Automation Ltd. (Former QA Engineer, 2023–2025)",
+      },
+      knowsAbout: [
+        "CNC Machine Design",
+        "SolidWorks",
+        "Siemens NX",
+        "PTC Creo",
+        "Autodesk Fusion 360",
+        "AutoCAD",
+        "Mastercam",
+        "PowerShape",
+        "PowerMill",
+        "ANSYS FEA",
+        "GD&T ASME Y14.5",
+        "Plastic Injection Mould Design",
+        "Sheet Metal Press Tool Design",
+        "DFM and DFA",
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${baseUrl}/#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Who is Soumma Chakraborty?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Soumma Chakraborty is a Mechanical Engineer from Kolkata specializing in CNC machine design, precision mechanical systems, CAD/CAM (SolidWorks, Siemens NX, PTC Creo, Mastercam), GD&T (ASME Y14.5), and tool design, with prior experience as a Quality Assurance Engineer at Jyoti CNC Automation Ltd.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What engineering projects has Soumma Chakraborty designed?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Key projects include a Key Ring Sheet Metal Press Tool, Reverse-Engineered Hand Injection Moulding Machine, Multi-Rotor Drone Prototype using PowerShape and PowerMill, and an ANSYS-validated Marker Stand Plastic Injection Mould.",
+          },
+        },
+      ],
+    },
+  ],
+};
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: ReactNode;
-}>) {
-  return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`
-        ${geistSans.variable}
-        ${geistMono.variable}
-        font-sans
-        scroll-smooth
-        h-full
-        antialiased
-      `}
-    >
-      <body
-        className="
-          min-h-full
-          flex
-          flex-col
-          font-sans
-          bg-[var(--background)]
-          text-[var(--foreground)]
-          selection:bg-[var(--accent)]
-          selection:text-white
-        "
-      >
-        {/* Structured Data: Website + Person */}
-        <JsonLd />
-
-        {/* Accessibility: Skip Navigation */}
-        <a
-          href="#main-content"
-          className="
-            sr-only
-            focus:not-sr-only
-            focus:fixed
-            focus:top-4
-            focus:left-4
-            focus:z-[100]
-            focus:px-4
-            focus:py-2
-            focus:bg-[var(--foreground)]
-            focus:text-[var(--background)]
-            focus:rounded-md
-            focus:shadow-lg
-            focus:outline-none
-            focus:ring-2
-            focus:ring-[var(--accent)]
-            font-mono
-            text-xs
-          "
-        >
-          Skip to main engineering content
-        </a>
-
-        <ThemeProvider>
-          <Navbar />
-
-          <main
-            id="main-content"
-            tabIndex={-1}
-            className="
-              flex-1
-              flex
-              flex-col
-              focus:outline-none
-            "
-          >
-            {children}
-          </main>
-
-          <Footer />
-
-          <ToastContainer />
-        </ThemeProvider>
-      </body>
-    </html>
-  );
-}
+// RootLayout er <body> er vitore ei script tag-ta render korbe:
+// <script
+//   type="application/ld+json"
+//   dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+// />
