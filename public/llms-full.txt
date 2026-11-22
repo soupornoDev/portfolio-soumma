@@ -1,0 +1,157 @@
+# Soumma Chakraborty — Full Portfolio Information for Language Models
+
+Canonical website: https://potfolio-soumma-backend.vercel.app/
+Source repository: https://github.com/soupornoDev/portfolio-soumma
+
+## 1. Overview
+
+This is the personal engineering portfolio of Soumma Chakraborty. It presents a professional profile at the intersection of mechanical engineering, precision design, and modern web technology. The portfolio is intended to communicate engineering background, technical capabilities, design projects, and professional development through an interactive, responsive digital experience.
+
+The portfolio's stated positioning is: “DESIGN. ENGINEER. INNOVATE.” Its engineering philosophy emphasizes transforming ideas into practical, precise, and efficient solutions.
+
+## 2. Professional profile
+
+Name: Soumma Chakraborty
+Professional focus: Mechanical engineering, CNC machine design, CAD/CAM, and product design.
+
+The published profile describes interests in mechanical design, precision engineering, product development, and applying modern CAD/CAM technologies to practical engineering problems.
+
+## 3. Education and training
+
+- B.Tech in Mechanical Engineering — Future Institute of Technology, Kolkata.
+- PG Diploma in Tool Design & CAD/CAM — CTTC, Bhubaneswar.
+- Product Design Guidelines — IIT Roorkee.
+
+## 4. Technical capabilities
+
+The README identifies the following areas of knowledge and engineering work:
+
+- Mechanical design.
+- CNC machine design.
+- CAD/CAM technologies.
+- Product design and product development.
+- 3D modelling using Creo and Siemens NX.
+- Sheet metal design.
+- Surface modelling.
+- Geometric Dimensioning and Tolerancing (GD&T).
+- Finite Element Analysis (FEA) using ANSYS.
+
+The portfolio's engineering project showcase is intended to explain the engineering problem, design approach, tools used, and outcome for each project. Specific project titles, detailed descriptions, and measurable outcomes should be taken from the live portfolio/source code when available; they are not fabricated in this document.
+
+## 5. Design philosophy
+
+The portfolio describes a premium, minimal, engineering-inspired visual language informed by modern engineering interfaces, precision machinery, technical documentation, and contemporary digital portfolios.
+
+Its stated design principles are:
+
+- Precision: clean layouts, structured content, and attention to detail.
+- Simplicity: interfaces that prioritize meaningful information.
+- Performance: efficient rendering and optimized user experiences.
+- Responsiveness: a consistent experience across desktop, tablet, and mobile.
+- Accessibility: thoughtful navigation, readable content, and usability.
+- Professionalism: a visual language suitable for recruiters and engineering professionals.
+
+## 6. Portfolio experience and capabilities
+
+The repository README describes these portfolio-level features:
+
+- Responsive layouts for desktop workstations, laptops, tablets, and mobile devices.
+- Light and dark themes.
+- Theme persistence through the existing theme provider.
+- Structured presentation of education, CAD/CAM specialization, technical skills, engineering interests, experience, selected projects, and professional links.
+- Interactive UI elements and consistent visual styling across sections.
+
+The README mentions portfolio sections such as About, Skills, Projects, Experience, and Contact. The exact routes and the current content of each section should be verified against the deployed application and source code.
+
+## 7. Website implementation
+
+The repository README describes the project as a modular Next.js application using the App Router.
+
+Technologies named in the README:
+
+- Next.js — React framework and application architecture.
+- React — component-based user interface.
+- TypeScript — type safety and maintainability.
+- Tailwind CSS — utility-first styling.
+- CSS — custom styling and animations.
+- Geist — typography.
+- Next.js App Router — routing and layouts.
+- React components — reusable interface elements.
+- ThemeProvider — theme management.
+- shadcn/ui — UI components, where integrated.
+- Anime.js — animation, where integrated.
+- Vercel — deployment platform.
+- Git and GitHub — version control and source-code hosting.
+- MongoDB — database, where used by the application.
+
+Important qualification: the README itself cautions that the technology list should reflect actual dependencies and integrations. Confirm exact installed packages and active integrations in package.json and the implementation before making definitive claims about optional technologies.
+
+## 8. Application architecture
+
+The README characterizes the application as a modular Next.js architecture with an App Router, root layout, pages/routes, theme provider, navigation, footer, toast container, portfolio sections, and portfolio data. The repository's visible top-level structure includes:
+
+- app/
+- components/
+- hooks/
+- lib/
+- public/
+- .env.example
+- AGENTS.md
+- LICENSE
+- README.md
+- components.json
+- eslint.config.mjs
+- next.config.ts
+- package-lock.json
+- package.json
+- tsconfig.json
+
+This list reflects the repository view and is not a complete recursive file inventory.
+
+## 9. Deployment and development
+
+The repository is associated with a Vercel deployment at:
+https://potfolio-soumma-backend.vercel.app/
+
+The README gives these local development steps:
+
+1. Clone https://github.com/soupornoDev/portfolio-soumma.git
+2. Change directory to portfolio-soumma.
+3. Install dependencies with npm install.
+4. Configure any required environment variables in .env.local, using .env.example and the actual application configuration as the source of truth.
+5. Start the development server with npm run dev.
+6. The README's expected local address is http://localhost:3000.
+
+The README describes Vercel deployment by pushing the project to GitHub, importing the repository into Vercel, configuring required environment variables, and deploying. It notes that Vercel can automatically deploy changes pushed to the connected Git repository.
+
+## 10. SEO and discoverability
+
+The README discusses the following SEO elements as part of the project foundation:
+
+- Structured metadata.
+- Semantic HTML.
+- Sitemap generation.
+- robots.txt configuration.
+- Canonical URLs.
+- Open Graph metadata.
+- Google Search Console verification.
+
+These files and behaviors should be checked in the current source code and production deployment before asserting that each is active or correctly configured.
+
+## 11. Source-of-truth and accuracy guidance
+
+For the most accurate and current details, consult:
+
+- Live portfolio: https://potfolio-soumma-backend.vercel.app/
+- GitHub repository: https://github.com/soupornoDev/portfolio-soumma
+
+Do not infer or fabricate:
+
+- Employment history, employer names, job titles, or dates.
+- Project titles, clients, project outcomes, or performance metrics.
+- Email addresses, phone numbers, or social profile URLs.
+- Additional degrees, certificates, or awards.
+- Specific tools or software not confirmed by the current portfolio or repository.
+- Production behavior that is only described as a planned or future improvement.
+
+If this document conflicts with the live portfolio or repository, prefer the latest explicit information published in the source.
